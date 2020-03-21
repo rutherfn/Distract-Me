@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Distract Me</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="app_name_splash_desc">This is the splash screen title, which is Distract Me.</string>
+    <string name="app_splash">Splash Screen For Distract Me</string>
+    <string name="tab_text_1">News</string>
+    <string name="tab_text_2">Saved News</string>
 </resources>
