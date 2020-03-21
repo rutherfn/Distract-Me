@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.nicholasrutherford.distractme.R
+import com.nicholasrutherford.distractme.helpers.Typeface
+import kotlinx.android.synthetic.main.activity_splash.*
 
 /**
  * Created by Nick R.
@@ -12,10 +14,13 @@ import com.nicholasrutherford.distractme.R
 
 class SplashActivity : AppCompatActivity() {
 
+    private val typeface = Typeface()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         delayHandlerForSplash()
+        setTypeFaceOfSplashTitle()
     }
 
     private fun startUpMainActivity() {
@@ -29,5 +34,9 @@ class SplashActivity : AppCompatActivity() {
             startUpMainActivity()
         }, 5000)
         }
+
+    private fun setTypeFaceOfSplashTitle() {
+        typeface.setTypefaceForHeaderBold(tvSplashTitle,applicationContext)
+    }
 
     }
