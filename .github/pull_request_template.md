@@ -5,7 +5,7 @@ https://trello.com/nicholasrutherford5/boards
 * issue 1
 
 ### Proposed Changes
-* change 1
+* changes 1
 
 ### TO-DO
 * to-do 1
