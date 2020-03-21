@@ -2,6 +2,10 @@
     <string name="app_name">Distract Me</string>
     <string name="app_name_splash_desc">This is the splash screen title, which is Distract Me.</string>
     <string name="app_splash">Splash Screen For Distract Me</string>
+    <string name="title_article_desc">Here is the title for the set article.</string>
+    <string name="desc_article_text">Here is the desc for the set article.</string>
+    <string name="latin_text_filler">Lorem ipsum dolor sit amet, mel debitis eleifend tincidunt te, cu sea debet volumus argumentum. At duo rebum nominavi, te posse reprimique duo…</string>
+    <string name="like_image_view">Like Image view text.</string>
     <string name="tab_text_1">News</string>
     <string name="tab_text_2">Saved News</string>
 </resources>
