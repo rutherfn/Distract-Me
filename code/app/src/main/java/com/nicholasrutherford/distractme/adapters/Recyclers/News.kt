@@ -5,22 +5,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
-import com.nicholasrutherford.distractme.viewholders.ArticleHomeViewHolder
+import com.nicholasrutherford.distractme.data.NewsResponse
+import com.nicholasrutherford.distractme.viewholders.NewsHomeViewHolder
 
-class Article(private val mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class News(private val mContext: Context, private val newsResponse: NewsResponse) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.article_home_layout, parent, false)
-        return ArticleHomeViewHolder(itemView,mContext)
+        return NewsHomeViewHolder(itemView,mContext)
     }
 
     override fun getItemCount(): Int {
-        return 1
+        return newsResponse.articles.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val articleHomeViewHolder = holder as ArticleHomeViewHolder
-        articleHomeViewHolder.main()
+        val newsHomeViewHolder = holder as NewsHomeViewHolder
+        newsHomeViewHolder.main(newsResponse,position)
     }
 
 }

@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
-import com.nicholasrutherford.distractme.adapters.Recyclers.Article
+import com.nicholasrutherford.distractme.adapters.Recyclers.News
+import com.nicholasrutherford.distractme.network.RepositoryImp.NewsRepositoryImp
 
 class Home : Fragment() {
+    private val repository: NewsRepositoryImp = NewsRepositoryImp()
     private var mView: View? = null
     private var rvHomes: RecyclerView? = null
 
@@ -27,20 +30,18 @@ class Home : Fragment() {
 
     private fun main() {
         setUpArticleAdapter()
+        showFirstTodo()
     }
 
     private fun setUpArticleAdapter() {
-        val articleAdapter = Article(context!!)
         rvHomes!!.itemAnimator = null
         rvHomes!!.layoutManager = LinearLayoutManager(context!!)
-        rvHomes!!.adapter = articleAdapter
     }
 
-    fun newInstance(title: String): Fragment {
-        val fragment = Home()
-        val args = Bundle()
-        args.putString("title", title)
-        fragment.arguments = args
-        return fragment
+    private fun showFirstTodo() {
+        repository.getNewsTopHeadlines("us", "92d8c9e8d1a44be58676ee20051e3c77").observe(viewLifecycleOwner, Observer {
+            val articleAdapter = News(context!!,it)
+            rvHomes!!.adapter = articleAdapter
+        })
     }
 }
