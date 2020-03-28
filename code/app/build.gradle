@@ -64,4 +64,10 @@ dependencies {
 
     // picasso
    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    def arch_version = '2.2.0-alpha01'
+    implementation "androidx.lifecycle:lifecycle-extensions:$arch_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$arch_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$arch_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$arch_version"
 }
