@@ -7,5 +7,8 @@
     <string name="latin_text_filler">Lorem ipsum dolor sit amet, mel debitis eleifend tincidunt te, cu sea debet volumus argumentum. At duo rebum nominavi, te posse reprimique duo…</string>
     <string name="like_image_view">Like Image view text.</string>
     <string name="tab_text_1">News</string>
-    <string name="tab_text_2">Saved News</string>
+    <string name="tab_text_2">Filter</string>
+    <string name="tab_text_3">Saved</string>
+    <string name="tab_text_4">Timer</string>
+    <string name="tab_text_5">More</string>
 </resources>

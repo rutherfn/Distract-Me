@@ -15,6 +15,7 @@ import com.nicholasrutherford.distractme.network.RepositoryImp.NewsRepositoryImp
 import kotlinx.coroutines.Dispatchers
 
 class Home : Fragment() {
+    private var articleAdapter: News? = null
     private val repository: NewsRepositoryImp = NewsRepositoryImp()
     private var mView: View? = null
     private var rvHomes: RecyclerView? = null
@@ -33,6 +34,7 @@ class Home : Fragment() {
     private fun main() {
         setUpArticleAdapter()
         showTopHeadlines()
+       // updateHeadlinesTest()
     }
 
     private fun setUpArticleAdapter() {
@@ -45,10 +47,21 @@ class Home : Fragment() {
         emit(result)
     }
 
+    private val newsTopHeadlinesTest = liveData(Dispatchers.IO) {
+        val result = repository.getNewsTopHeadlines("pl", "92d8c9e8d1a44be58676ee20051e3c77")
+        emit(result)
+    }
+
     private fun showTopHeadlines() {
         newsTopHeadlines.observe(viewLifecycleOwner, Observer {
-            val articleAdapter = News(context!!, it)
+            articleAdapter = News(context!!, it)
             rvHomes!!.adapter = articleAdapter
+        })
+    }
+
+    private fun updateHeadlinesTest() {
+        newsTopHeadlinesTest.observe(viewLifecycleOwner, Observer {
+            articleAdapter?.update(it)
         })
     }
 

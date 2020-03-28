@@ -1,6 +1,8 @@
 package com.nicholasrutherford.distractme.activitys
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity

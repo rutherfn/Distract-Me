@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cnsHomeLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:paddingBottom="@dimen/default_margin_or_padding"
     android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -37,19 +36,69 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_margin_or_padding"
-        android:ems="17"
+        android:ems="12"
+        android:textSize="@dimen/default_body_tv_size"
         android:text="@string/latin_text_filler"
         app:layout_constraintStart_toStartOf="@+id/tvArticleTitle"
         app:layout_constraintTop_toBottomOf="@+id/tvArticleTitle" />
 
+    <TextView
+        android:id="@+id/tvAuthorTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/default_author_tv_size"
+        android:textAlignment="center"
+        android:ems="8"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        app:layout_constraintEnd_toEndOf="@+id/ivArticle"
+        app:layout_constraintStart_toStartOf="@+id/ivArticle"
+        app:layout_constraintTop_toBottomOf="@+id/ivArticle"
+        android:gravity="center_horizontal" />
+
+    <Button
+        android:id="@+id/btnViewArticle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/default_margin_or_padding"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        app:layout_constraintEnd_toEndOf="@+id/ivStar"
+        app:layout_constraintStart_toStartOf="@+id/ivStar"
+        app:layout_constraintTop_toBottomOf="@+id/ivStar" />
+
     <ImageView
-        android:id="@+id/ivLike"
-        android:contentDescription="@string/like_image_view"
-        android:layout_width="@dimen/iv_like_default_size"
-        android:layout_height="@dimen/iv_like_default_size"
-        android:layout_marginTop="@dimen/margin_top_like"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/ivStar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        app:layout_constraintEnd_toEndOf="@+id/tvAuthorTitle"
+        app:layout_constraintStart_toStartOf="@+id/tvAuthorTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvAuthorTitle"
+        app:srcCompat="@android:drawable/star_big_off" />
+
+    <TextView
+        android:id="@+id/tvSource"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="11"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        app:layout_constraintStart_toStartOf="@+id/tvArticleDesc"
         app:layout_constraintTop_toBottomOf="@+id/tvArticleDesc" />
+
+    <TextView
+        android:id="@+id/tvArticleDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:ems="13"
+        app:layout_constraintStart_toStartOf="@+id/tvSource"
+        app:layout_constraintTop_toBottomOf="@+id/tvSource" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="5sp"
+        android:background="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvArticleDate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
