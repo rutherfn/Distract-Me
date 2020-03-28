@@ -9,6 +9,5 @@
     <string name="tab_text_1">News</string>
     <string name="tab_text_2">Filter</string>
     <string name="tab_text_3">Saved</string>
-    <string name="tab_text_4">Timer</string>
-    <string name="tab_text_5">More</string>
+    <string name="tab_text_4">More</string>
 </resources>

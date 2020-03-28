@@ -18,8 +18,7 @@ class ViewPagerAdapter (private val mFragmentManager: FragmentManager, private v
         R.string.tab_text_1,
         R.string.tab_text_2,
         R.string.tab_text_3,
-        R.string.tab_text_4,
-        R.string.tab_text_5
+        R.string.tab_text_4
     )
 
     override fun getItem(position: Int): Fragment {
@@ -30,7 +29,7 @@ class ViewPagerAdapter (private val mFragmentManager: FragmentManager, private v
     }
 
     override fun getCount(): Int {
-        return 5
+        return 4
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
