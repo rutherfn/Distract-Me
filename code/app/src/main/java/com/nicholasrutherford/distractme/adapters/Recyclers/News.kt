@@ -8,7 +8,7 @@ import com.nicholasrutherford.distractme.R
 import com.nicholasrutherford.distractme.data.NewsResponse
 import com.nicholasrutherford.distractme.viewholders.NewsHomeViewHolder
 
-class News(private val mContext: Context, private val newsResponse: NewsResponse) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class News(private val mContext: Context, private var newsResponse: NewsResponse) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.article_home_layout, parent, false)
@@ -22,6 +22,11 @@ class News(private val mContext: Context, private val newsResponse: NewsResponse
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val newsHomeViewHolder = holder as NewsHomeViewHolder
         newsHomeViewHolder.main(newsResponse,position)
+    }
+
+    fun update(newNewsResponse: NewsResponse) {
+        newsResponse = newNewsResponse
+        notifyDataSetChanged()
     }
 
 }

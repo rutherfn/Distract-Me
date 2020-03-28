@@ -16,7 +16,10 @@ class ViewPagerAdapter (private val mFragmentManager: FragmentManager, private v
     private val mFragmentTags: MutableMap<Int, String?>
     private val TAB_TITLES = arrayOf(
         R.string.tab_text_1,
-        R.string.tab_text_2
+        R.string.tab_text_2,
+        R.string.tab_text_3,
+        R.string.tab_text_4,
+        R.string.tab_text_5
     )
 
     override fun getItem(position: Int): Fragment {
@@ -27,7 +30,7 @@ class ViewPagerAdapter (private val mFragmentManager: FragmentManager, private v
     }
 
     override fun getCount(): Int {
-        return 1
+        return 5
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
