@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
 import com.nicholasrutherford.distractme.activitys.WebViewActivity
-import com.nicholasrutherford.distractme.data.NewsResponse
+import com.nicholasrutherford.distractme.data.responses.NewsResponse
 import com.nicholasrutherford.distractme.helpers.Typeface
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView

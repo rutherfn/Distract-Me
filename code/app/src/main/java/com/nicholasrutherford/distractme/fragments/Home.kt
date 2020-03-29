@@ -10,8 +10,8 @@ import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
-import com.nicholasrutherford.distractme.adapters.Recyclers.News
-import com.nicholasrutherford.distractme.network.RepositoryImp.NewsRepositoryImp
+import com.nicholasrutherford.distractme.adapters.recyclers.News
+import com.nicholasrutherford.distractme.network.repositoryImp.NewsRepositoryImp
 import kotlinx.coroutines.Dispatchers
 
 class Home : Fragment() {

@@ -18,7 +18,7 @@ class More: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mView = inflater.inflate(R.layout.fragment_home, container, false)
+        mView = inflater.inflate(R.layout.fragment_more, container, false)
         rvMore = mView!!.findViewById(R.id.rvMore)
         main()
         return mView

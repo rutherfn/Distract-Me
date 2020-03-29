@@ -10,4 +10,9 @@
     <string name="tab_text_2">Filter</string>
     <string name="tab_text_3">Saved</string>
     <string name="tab_text_4">More</string>
+    <string name="top_headlines">Top Headlines</string>
+    <string name="everything">Everything</string>
+    <string name="sources">Sources</string>
+    <string name="which_category_to_filter_by">Which Category Of News Did You Want To Filter By?</string>
+    <string name="country_categories">Which Country Would You Like To Filter By?</string>
 </resources>
