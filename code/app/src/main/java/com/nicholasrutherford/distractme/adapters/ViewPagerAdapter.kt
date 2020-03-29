@@ -1,12 +1,10 @@
 package com.nicholasrutherford.distractme.adapters
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentStatePagerAdapter
 import com.nicholasrutherford.distractme.R
 import com.nicholasrutherford.distractme.fragments.Filter
 import com.nicholasrutherford.distractme.fragments.Home

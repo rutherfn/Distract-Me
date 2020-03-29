@@ -1,12 +1,14 @@
 package com.nicholasrutherford.distractme.viewholders
 
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
+import com.nicholasrutherford.distractme.activitys.WebViewActivity
 import com.nicholasrutherford.distractme.data.NewsResponse
 import com.nicholasrutherford.distractme.helpers.Typeface
 import com.squareup.picasso.Picasso
@@ -33,6 +35,7 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
         btnViewArticle.text = "View More"
         tvSource.text = "Source: ".plus(newsResponse.articles[pos].source.name)
         tvArticleDate.text = "Published Date: ".plus(newsResponse.articles[pos].publishedAt)
+        viewMoreNewsImp(newsResponse, pos)
     }
 
     private fun setTypeface() {
@@ -41,6 +44,18 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
         typeface.setTypefaceForBodyRegularBold(tvAuthorTitle, mContext)
         typeface.setTypefaceForSubHeaderBold(tvSource,mContext)
         typeface.setTypefaceForSubHeaderBold(tvArticleDate,mContext)
+    }
+
+    private fun viewMoreNewsImp(newsResponse: NewsResponse, pos: Int) {
+        btnViewArticle.setOnClickListener {
+            startWebViewActivity(newsResponse, pos)
+        }
+    }
+
+    private fun startWebViewActivity(newsResponse: NewsResponse, pos: Int) {
+        val intent = Intent(mContext, WebViewActivity::class.java)
+        intent.putExtra("url", newsResponse.articles[pos].url)
+        mContext.startActivity(intent)
     }
 
 }
