@@ -21,6 +21,7 @@ object RetroFitClient {
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .build().create(NewsApiService::class.java)
     }
+
 }
 
 }

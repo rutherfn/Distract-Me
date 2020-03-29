@@ -13,6 +13,8 @@
     <string name="top_headlines">Top Headlines</string>
     <string name="everything">Everything</string>
     <string name="sources">Sources</string>
-    <string name="which_category_to_filter_by">Which Category Of News Did You Want To Filter By?</string>
-    <string name="country_categories">Which Country Would You Like To Filter By?</string>
+    <string name="which_endpoint_top_headlines">What news did you want to see by top headlines?</string>
+    <string name="which_category_to_filter_by">Which category of news did you want to filter by?</string>
+    <string name="country_categories">Which country would you Like to filter by?</string>
+    <string name="nothing">Nothing</string>
 </resources>

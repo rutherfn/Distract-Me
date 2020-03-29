@@ -5,13 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.liveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
 import com.nicholasrutherford.distractme.adapters.recyclers.FilterBy
+import com.nicholasrutherford.distractme.network.repositoryImp.NewsRepositoryImp
+import kotlinx.coroutines.Dispatchers
 
 class Filter: Fragment() {
+    private var listOfCountriesNames: ArrayList<String> = ArrayList()
     private var filterByAdapter: FilterBy? = null
+    private val repository: NewsRepositoryImp = NewsRepositoryImp()
     private var mView: View? = null
     private var rvFilter: RecyclerView? = null
 
@@ -28,12 +34,26 @@ class Filter: Fragment() {
 
     private fun main() {
         setUpArticleAdapter()
+        showCountries()
+    }
+
+    private val grabCountries = liveData(Dispatchers.IO) {
+        val result = repository.getCountries()
+        emit(result)
     }
 
     private fun setUpArticleAdapter() {
         rvFilter!!.itemAnimator = null
         rvFilter!!.layoutManager = LinearLayoutManager(context!!)
-        filterByAdapter = FilterBy(context!!)
-        rvFilter!!.adapter = filterByAdapter
+    }
+
+    private fun showCountries() {
+        grabCountries.observe(viewLifecycleOwner, Observer {
+            for(i in it.countries.iterator()) {
+                listOfCountriesNames.add(i.name)
+            }
+            filterByAdapter = FilterBy(context!!, it, listOfCountriesNames)
+            rvFilter!!.adapter = filterByAdapter
+        })
     }
 }

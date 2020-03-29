@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
+import com.nicholasrutherford.distractme.data.responses.CountriesResponse
 import com.nicholasrutherford.distractme.viewholders.FilterByViewHolder
 
-class FilterBy(private val mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FilterBy(private val mContext: Context, private var countriesResponse: CountriesResponse, private var listOfCountriesNames: ArrayList<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.filter_layout, parent, false)
@@ -20,6 +21,6 @@ class FilterBy(private val mContext: Context) : RecyclerView.Adapter<RecyclerVie
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val filterByViewHolder = holder as FilterByViewHolder
-        filterByViewHolder.main(position)
+        filterByViewHolder.main(countriesResponse,position, listOfCountriesNames)
     }
 }
