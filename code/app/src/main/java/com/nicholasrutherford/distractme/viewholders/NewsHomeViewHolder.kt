@@ -9,7 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
 import com.nicholasrutherford.distractme.activitys.WebViewActivity
+import com.nicholasrutherford.distractme.adapters.recyclers.News
 import com.nicholasrutherford.distractme.data.responses.NewsResponse
+import com.nicholasrutherford.distractme.fragments.Home
 import com.nicholasrutherford.distractme.helpers.Typeface
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
@@ -17,7 +19,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 class NewsHomeViewHolder(itemView: View, private val mContext: Context) : RecyclerView.ViewHolder(itemView) {
 
     private val typeface = Typeface()
-    private var ivArticle: CircleImageView = itemView.findViewById(R.id.ivArticle)
+    var ivArticle: CircleImageView = itemView.findViewById(R.id.ivArticle)
     private var tvArticleTitle: TextView = itemView.findViewById(R.id.tvArticleTitle)
     private var tvArticleDesc: TextView = itemView.findViewById(R.id.tvArticleDesc)
     private var tvAuthorTitle: TextView = itemView.findViewById(R.id.tvAuthorTitle)
@@ -36,6 +38,7 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
         tvSource.text = "Source: ".plus(newsResponse.articles[pos].source.name)
         tvArticleDate.text = "Published Date: ".plus(newsResponse.articles[pos].publishedAt)
         viewMoreNewsImp(newsResponse, pos)
+
     }
 
     private fun setTypeface() {
@@ -48,7 +51,7 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
 
     private fun viewMoreNewsImp(newsResponse: NewsResponse, pos: Int) {
         btnViewArticle.setOnClickListener {
-            startWebViewActivity(newsResponse, pos)
+          //  startWebViewActivity(newsResponse, pos)
         }
     }
 

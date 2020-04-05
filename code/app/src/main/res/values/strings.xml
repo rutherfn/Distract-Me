@@ -16,5 +16,9 @@
     <string name="which_endpoint_top_headlines">What news did you want to see by top headlines?</string>
     <string name="which_category_to_filter_by">Which category of news did you want to filter by?</string>
     <string name="country_categories">Which country would you Like to filter by?</string>
-    <string name="nothing">Nothing</string>
+    <string name="nothing">None</string>
+    <string name="top_headlines_by_country">By Country</string>
+    <string name="top_headlines_by_source">By Source</string>
+    <string name="top_headlines_by_country_and_category">By Country And Category</string>
+    <string name="top_headlines_by_subject">By Subject</string>
 </resources>

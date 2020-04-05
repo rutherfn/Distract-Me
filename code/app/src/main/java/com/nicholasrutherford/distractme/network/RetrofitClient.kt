@@ -17,7 +17,7 @@ object RetroFitClient {
 
     val retrofitCountriesService: NewsApiService by lazy {
         Retrofit.Builder()
-            .baseUrl("https://api.myjson.com/")
+            .baseUrl("https://api.jsonbin.io/")
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .build().create(NewsApiService::class.java)
     }

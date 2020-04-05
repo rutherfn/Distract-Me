@@ -15,6 +15,7 @@ import com.nicholasrutherford.distractme.network.repositoryImp.NewsRepositoryImp
 import kotlinx.coroutines.Dispatchers
 
 class Filter: Fragment() {
+
     private var listOfCountriesNames: ArrayList<String> = ArrayList()
     private var filterByAdapter: FilterBy? = null
     private val repository: NewsRepositoryImp = NewsRepositoryImp()
@@ -47,7 +48,7 @@ class Filter: Fragment() {
         rvFilter!!.layoutManager = LinearLayoutManager(context!!)
     }
 
-    private fun showCountries() {
+    fun showCountries() {
         grabCountries.observe(viewLifecycleOwner, Observer {
             for(i in it.countries.iterator()) {
                 listOfCountriesNames.add(i.name)
@@ -56,4 +57,6 @@ class Filter: Fragment() {
             rvFilter!!.adapter = filterByAdapter
         })
     }
+
+
 }

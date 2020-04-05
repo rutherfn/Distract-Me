@@ -1,5 +1,6 @@
 package com.nicholasrutherford.distractme.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.nicholasrutherford.distractme.network.repositoryImp.NewsRepositoryImp
 import kotlinx.coroutines.Dispatchers
 
 class Home : Fragment() {
+    private val sharedPreference by lazy { context?.getSharedPreferences("NewsSharedPreferences", Context.MODE_PRIVATE) }
     private var articleAdapter: News? = null
     private val repository: NewsRepositoryImp = NewsRepositoryImp()
     private var mView: View? = null
@@ -34,7 +36,6 @@ class Home : Fragment() {
     private fun main() {
         setUpArticleAdapter()
         showTopHeadlines()
-       // updateHeadlinesTest()
     }
 
     private fun setUpArticleAdapter() {
@@ -47,22 +48,34 @@ class Home : Fragment() {
         emit(result)
     }
 
-    private val newsTopHeadlinesTest = liveData(Dispatchers.IO) {
-        val result = repository.getNewsTopHeadlines("pl", "92d8c9e8d1a44be58676ee20051e3c77")
-        emit(result)
-    }
-
     private fun showTopHeadlines() {
-        newsTopHeadlines.observe(viewLifecycleOwner, Observer {
-            articleAdapter = News(context!!, it)
-            rvHomes!!.adapter = articleAdapter
+        if(articleAdapter == null) {
+            newsTopHeadlines.observe(viewLifecycleOwner, Observer {
+                articleAdapter = News(context!!, it)
+                rvHomes!!.adapter = articleAdapter
+            })
+        } else {
+                updateTopHeadlineCountry()
+                rvHomes!!.adapter = articleAdapter
+                println("Here is the articles")
+        }
+    }
+
+    private fun updateTopHeadlineCountry() {
+        val newsTopHeadlineByCountry = liveData(Dispatchers.IO) {
+            val result = sharedPreference?.getString("countrySelected", "")?.let {
+                repository.getNewsTopHeadlines(
+                    it, "92d8c9e8d1a44be58676ee20051e3c77")
+            }
+            emit(result)
+        }
+        newsTopHeadlineByCountry.observe(viewLifecycleOwner, Observer {
+            it?.let { it1 -> articleAdapter?.update(it1) }
         })
     }
 
-    private fun updateHeadlinesTest() {
-        newsTopHeadlinesTest.observe(viewLifecycleOwner, Observer {
-            articleAdapter?.update(it)
-        })
+    interface RefreshInterface {
+        fun refreshAdapterFragmentB() {}
     }
 
 }

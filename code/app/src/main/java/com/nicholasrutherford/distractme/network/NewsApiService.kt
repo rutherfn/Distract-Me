@@ -11,7 +11,7 @@ interface NewsApiService {
     suspend fun getTopHeadlines(@Query("country") location: String, @Query("apiKey") apiKey:String):
             NewsResponse
 
-    @GET("bins/degco")
+    @GET("b/5e871d0c4f5f49640ba3375b")
     suspend fun getCountries(): CountriesResponse
 
 }
