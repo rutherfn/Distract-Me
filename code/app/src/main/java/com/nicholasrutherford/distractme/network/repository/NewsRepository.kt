@@ -5,7 +5,7 @@ import com.nicholasrutherford.distractme.data.responses.NewsResponse
 
 interface NewsRepository {
 
-    suspend fun getNewsTopHeadlines(country: String, apiKey: String): NewsResponse
+    suspend fun getNewsTopHeadlinesByCountry(country: String, apiKey: String): NewsResponse
 
     suspend fun getCountries() : CountriesResponse
 

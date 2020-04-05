@@ -50,6 +50,9 @@ class Filter: Fragment() {
 
     fun showCountries() {
         grabCountries.observe(viewLifecycleOwner, Observer {
+            if(listOfCountriesNames.size > 0) {
+                listOfCountriesNames.clear()
+            }
             for(i in it.countries.iterator()) {
                 listOfCountriesNames.add(i.name)
             }

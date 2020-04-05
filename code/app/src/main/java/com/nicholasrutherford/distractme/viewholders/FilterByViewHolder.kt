@@ -3,6 +3,7 @@ package com.nicholasrutherford.distractme.viewholders
 import android.content.Context
 import android.view.View
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
 import com.nicholasrutherford.distractme.activitys.MainActivity
@@ -38,6 +39,8 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
 
 
     private val typeface = Typeface()
+
+    private var clFilter: ConstraintLayout = itemView.findViewById(R.id.clFilter)
     private var tvFilterTitle: TextView = itemView.findViewById(R.id.tvFilterTitle)
     private var tvGetTopHeadlineNews: TextView = itemView.findViewById(R.id.tvGetTopHeadlineNews)
     private var spCategoryFilter: Spinner = itemView.findViewById(R.id.spCategoryFilter)
@@ -116,19 +119,22 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
 
     private fun addItemsListenerToCountriesSpinner(countriesResponse: CountriesResponse, pos: Int, listOfCountriesNames: ArrayList<String>) {
         val adapter = ArrayAdapter(mContext, android.R.layout.simple_spinner_dropdown_item, listOfCountriesNames)
-        spCountriesFilter.adapter = adapter
-
+        if(spCountriesFilter.adapter == null) {
+            spCountriesFilter.adapter = adapter
+        }
+        spCountriesFilter.setSelection(0, false)
         spCountriesFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 println("Nothing Selected")
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                when (countriesResponse.countries[position].name) {
-                    parent?.selectedItem.toString() -> { countrySelected = countriesResponse.countries[position].abv}
-                }
+                    when (countriesResponse.countries[position].name) {
+                        parent?.selectedItem.toString() -> {
+                            countrySelected = countriesResponse.countries[position].abv
+                        }
+                    }
             }
-
         }
     }
 

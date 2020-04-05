@@ -44,7 +44,7 @@ class Home : Fragment() {
     }
 
     private val newsTopHeadlines = liveData(Dispatchers.IO) {
-        val result = repository.getNewsTopHeadlines("us", "92d8c9e8d1a44be58676ee20051e3c77")
+        val result = repository.getNewsTopHeadlinesByCountry("us", "92d8c9e8d1a44be58676ee20051e3c77")
         emit(result)
     }
 
@@ -64,7 +64,7 @@ class Home : Fragment() {
     private fun updateTopHeadlineCountry() {
         val newsTopHeadlineByCountry = liveData(Dispatchers.IO) {
             val result = sharedPreference?.getString("countrySelected", "")?.let {
-                repository.getNewsTopHeadlines(
+                repository.getNewsTopHeadlinesByCountry(
                     it, "92d8c9e8d1a44be58676ee20051e3c77")
             }
             emit(result)
