@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvGetTopHeadlineNews" />
 
     <TextView
-        android:id="@+id/tvHeadlinesCountryCategory"
+        android:id="@+id/tvHeadlinesByCountryOnly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
@@ -66,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@+id/spGetTopHeadlineNews" />
 
     <TextView
-        android:id="@+id/tvHeadlinesSourceCategory"
+        android:id="@+id/tvHeadlinesSourceCategoryOnly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
@@ -77,8 +77,32 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spGetTopHeadlineNews" />
 
+    <TextView
+        android:id="@+id/tvHeadlinesCountryAndCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        android:text="@string/country_categories"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spGetTopHeadlineNews" />
+
+    <TextView
+        android:id="@+id/tvHeadlinesBySubject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        android:text="@string/subject_filter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spGetTopHeadlineNews" />
+
     <Spinner
-        android:id="@+id/spCountriesFilter"
+        android:id="@+id/spCountriesOnlyFilter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
@@ -86,7 +110,7 @@
         android:layout_marginStart="@dimen/default_margin_or_padding"
         android:layout_marginLeft="@dimen/default_margin_or_padding"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvHeadlinesCountryCategory" />
+        app:layout_constraintTop_toBottomOf="@+id/tvHeadlinesByCountryOnly" />
 
     <Spinner
         android:id="@+id/spSourceTopHeadlinesFilter"
@@ -97,7 +121,52 @@
         android:layout_marginStart="@dimen/default_margin_or_padding"
         android:layout_marginLeft="@dimen/default_margin_or_padding"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvHeadlinesSourceCategory" />
+        app:layout_constraintTop_toBottomOf="@+id/tvHeadlinesSourceCategoryOnly" />
+
+    <Spinner
+        android:id="@+id/spCountryFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="10sp"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeadlinesCountryAndCategory" />
+
+    <EditText
+        android:id="@+id/etSubjectTopHeadlines"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="10sp"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeadlinesBySubject" />
+
+    <TextView
+        android:id="@+id/tvHeadlinesCategoryAndCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        android:text="@string/categories_filter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spCountryFilter" />
+
+    <Spinner
+        android:id="@+id/spCategoryTopHeadlinesFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="10sp"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeadlinesCategoryAndCountry" />
 
     <Button
     android:id="@+id/btConfirmCountryFilter"
@@ -108,7 +177,7 @@
     android:text="Confirm"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/spCountriesFilter" />
+    app:layout_constraintTop_toBottomOf="@+id/spCountriesOnlyFilter" />
 
     <Button
         android:id="@+id/btnConfirmSourceTopHeadlinesFilter"
@@ -120,5 +189,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spSourceTopHeadlinesFilter" />
+
+    <Button
+        android:id="@+id/btnConfirmCategoryAndCountryFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spCategoryTopHeadlinesFilter" />
+
+    <Button
+        android:id="@+id/btnConfirmFilterSubject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etSubjectTopHeadlines" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

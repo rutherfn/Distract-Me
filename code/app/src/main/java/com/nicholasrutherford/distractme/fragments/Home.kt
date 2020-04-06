@@ -55,11 +55,17 @@ class Home : Fragment() {
                 rvHomes!!.adapter = articleAdapter
             })
         } else {
-            if(sharedPreference?.getBoolean("countryFilterByTopHeadlines",false)!!) {
+            if (sharedPreference?.getBoolean("countryFilterByTopHeadlines",false)!!) {
                 updateTopHeadlineCountry()
                 rvHomes!!.adapter = articleAdapter
             } else if(sharedPreference?.getBoolean("sourceFilterByTopHeadlines", false)!!) {
                 updateTopHeadlineSources()
+                rvHomes!!.adapter = articleAdapter
+            } else if(sharedPreference?.getBoolean("countryAndCategoryFilterByTopHeadlines",false)!!) {
+                updateTopHeadlinesCountryAndCategory()
+                rvHomes!!.adapter = articleAdapter
+            } else if(sharedPreference?.getBoolean("subjectFilterByTopHeadlines", false)!!) {
+                updateTopHeadlineBySubject()
                 rvHomes!!.adapter = articleAdapter
             }
         }
@@ -90,6 +96,33 @@ class Home : Fragment() {
             emit(result)
         }
         newsTopHeadlineBySources.observe(viewLifecycleOwner, Observer {
+            it?.let { it1 -> articleAdapter?.update(it1) }
+        })
+    }
+
+    private fun updateTopHeadlinesCountryAndCategory() {
+        val newsTopHeadlinesCountryAndCategory = liveData(Dispatchers.IO) {
+            val result = sharedPreference?.getString("countrySelectedTopHeadlinesFilterTwo", "")?.let {
+                repository.getTopHeadlinesByCountryAndCategory(
+                    it,
+                    sharedPreference?.getString("categorySelectedTopHeadlinesFilter","")!!,
+                    "92d8c9e8d1a44be58676ee20051e3c77")
+            }
+            emit(result)
+        }
+        newsTopHeadlinesCountryAndCategory.observe(viewLifecycleOwner, Observer {
+            it?.let { it1 -> articleAdapter?.update(it1) }
+        })
+    }
+
+    private fun updateTopHeadlineBySubject() {
+        val newsTopHeadlinesSubject = liveData(Dispatchers.IO) {
+            val result = sharedPreference?.getString("subjectSelectedTopHeadlines", "")?.let {
+                repository.getTopHeadlinesBySubject(it,"92d8c9e8d1a44be58676ee20051e3c77" )
+            }
+            emit(result)
+        }
+        newsTopHeadlinesSubject.observe(viewLifecycleOwner, Observer {
             it?.let { it1 -> articleAdapter?.update(it1) }
         })
     }

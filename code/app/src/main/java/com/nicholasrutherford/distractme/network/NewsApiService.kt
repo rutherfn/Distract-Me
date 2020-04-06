@@ -17,6 +17,17 @@ interface NewsApiService {
                                         @Query("apiKey") apiKey: String):
             NewsResponse
 
+    @GET("top-headlines")
+    suspend fun getTopHeadlinesByCountryAndCategory(@Query("country") sources: String,
+                                                    @Query("category") category: String,
+                                                    @Query("apiKey") apiKey: String):
+            NewsResponse
+
+    @GET("top-headlines")
+    suspend fun getTopHeadlinesBySubject(@Query("q")subject: String,
+                                        @Query("apiKey") apiKey: String):
+            NewsResponse
+
     @GET("sources")
     suspend fun getAllSources(@Query("apiKey") apiKey: String):
             SourcesResponse

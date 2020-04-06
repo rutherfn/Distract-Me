@@ -30,7 +30,10 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
 
     fun main(newsResponse: NewsResponse, pos: Int) {
         setTypeface()
-        Picasso.get().load(newsResponse.articles[pos].urlToImage).placeholder(R.drawable.news).into(ivArticle)
+        if(newsResponse.articles[pos].urlToImage != "") {
+            Picasso.get().load(newsResponse.articles[pos].urlToImage).placeholder(R.drawable.news)
+                .into(ivArticle)
+        }
         tvArticleTitle.text = newsResponse.articles[pos].title
         tvArticleDesc.text = newsResponse.articles[pos].description
         tvAuthorTitle.text = newsResponse.articles[pos].author
