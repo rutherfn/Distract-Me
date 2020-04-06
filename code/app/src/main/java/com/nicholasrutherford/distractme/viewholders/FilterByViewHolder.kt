@@ -3,13 +3,10 @@ package com.nicholasrutherford.distractme.viewholders
 import android.content.Context
 import android.view.View
 import android.widget.*
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
 import com.nicholasrutherford.distractme.activitys.MainActivity
-import com.nicholasrutherford.distractme.adapters.recyclers.News
 import com.nicholasrutherford.distractme.data.responses.CountriesResponse
-import com.nicholasrutherford.distractme.fragments.Home
 import com.nicholasrutherford.distractme.helpers.Typeface
 
 class FilterByViewHolder(itemView: View, private val mContext: Context) : RecyclerView.ViewHolder(itemView) {
@@ -31,6 +28,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
 
     // selected items
     private var countrySelected: String = ""
+    private var topHeadlineSourceSelected: String = ""
 
     // spinner arrays
     private val spinnerCategoryItems = arrayOf(nothingTitle, topHeadlinesTitle, everythingTitle, sourcesTitle)
@@ -40,7 +38,6 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
 
     private val typeface = Typeface()
 
-    private var clFilter: ConstraintLayout = itemView.findViewById(R.id.clFilter)
     private var tvFilterTitle: TextView = itemView.findViewById(R.id.tvFilterTitle)
     private var tvGetTopHeadlineNews: TextView = itemView.findViewById(R.id.tvGetTopHeadlineNews)
     private var spCategoryFilter: Spinner = itemView.findViewById(R.id.spCategoryFilter)
@@ -49,38 +46,17 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
     private var tvHeadlinesCountryCategory: TextView = itemView.findViewById(R.id.tvHeadlinesCountryCategory)
     private var btnConfirmCountryFilter: Button = itemView.findViewById(R.id.btConfirmCountryFilter)
 
-    fun main(countriesResponse: CountriesResponse, pos: Int, listOfCountriesNames: ArrayList<String>) {
+    // Top Headlines Filter By Source
+    private var tvHeadlinesSourceCategory: TextView = itemView.findViewById(R.id.tvHeadlinesSourceCategory)
+    private var spSourceTopHeadlinesFilter: Spinner = itemView.findViewById(R.id.spSourceTopHeadlinesFilter)
+    private var btnConfirmSourceTopHeadlinesFilter: Button = itemView.findViewById(R.id.btnConfirmSourceTopHeadlinesFilter)
+
+    fun main(countriesResponse: CountriesResponse, pos: Int, listOfCountriesNames: ArrayList<String>, listOfSourcesNames: ArrayList<String>, listOfSourceIdNames: ArrayList<String>) {
         tvFilterTitle.text = whichCategoryFilterByValue
-        addItemsToNewsTypeListenerSpinners()
-        topHeadlinesSpinnersListeners(countriesResponse, pos, listOfCountriesNames)
+        addItemsListenerToFilterByCategorySpinner()
+        topHeadlinesSpinnersListeners(countriesResponse, pos, listOfCountriesNames, listOfSourcesNames, listOfSourceIdNames)
         setTypeface()
-        btnConfirmCountryFilter.setOnClickListener {
-            editor.putBoolean("countryFilterBy",true)
-            editor.putString("countrySelected", countrySelected)
-            editor.apply()
-            (mContext as MainActivity).refreshAdapterFragmentB()
-        }
-    }
-
-    private fun addItemsToNewsTypeListenerSpinners() {
-        val adapter = ArrayAdapter(mContext, android.R.layout.simple_spinner_dropdown_item, spinnerTopHeadlinesNewsItems)
-        spGetTopHeadlineNews.adapter = adapter
-
-        spGetTopHeadlineNews.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                when {
-                    parent?.selectedItem.toString() == nothingTitle -> {hideHeadlineCountries() }
-                    parent?.selectedItem.toString() == headlinesByCountryTitle -> {showHeadlineCountries() }
-                    parent?.selectedItem.toString() == headlinesBySourceTitle -> {hideHeadlineCountries()}
-                    parent?.selectedItem.toString() == headlinesByCountryAndCategoryTitle -> {hideHeadlineCountries()}
-                    parent?.selectedItem.toString() == headlinesBySubjectTitle -> {hideHeadlineCountries()}
-                }
-            }
-
-        }
+        clickConfirmCategoryFilter()
     }
 
     private fun addItemsListenerToFilterByCategorySpinner() {
@@ -96,7 +72,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
                 when {
                     parent?.selectedItem.toString() == nothingTitle -> {
                         hideTopShowHeadlineNews()
-                        hideHeadlineCountries()
+                        hideHeadlineCountriesFilterBy()
                     }
                     parent?.selectedItem.toString() == topHeadlinesTitle -> {
                         showTopHeadlineNews()
@@ -112,16 +88,45 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
         }
     }
 
-    private fun topHeadlinesSpinnersListeners(countriesResponse: CountriesResponse, pos: Int, listOfCountriesNames: ArrayList<String>) {
-        addItemsListenerToCountriesSpinner(countriesResponse, pos, listOfCountriesNames)
-        addItemsListenerToFilterByCategorySpinner()
+    private fun addItemsToNewsFilterByTopHeadlinesListenerSpinners() {
+        val adapter = ArrayAdapter(mContext, android.R.layout.simple_spinner_dropdown_item, spinnerTopHeadlinesNewsItems)
+        spGetTopHeadlineNews.adapter = adapter
+
+        spGetTopHeadlineNews.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                when {
+                    parent?.selectedItem.toString() == nothingTitle -> {
+                        hideHeadlineCountriesFilterBy()
+                        hideHeadlinesSourceFilterBy()
+                    }
+                    parent?.selectedItem.toString() == headlinesByCountryTitle -> {
+                        showHeadlineCountriesFilterBy()
+                        hideHeadlinesSourceFilterBy()
+                    }
+                    parent?.selectedItem.toString() == headlinesBySourceTitle -> {
+                        hideHeadlineCountriesFilterBy()
+                        showHeadlinesSourceFilterBy()
+                    }
+                    parent?.selectedItem.toString() == headlinesByCountryAndCategoryTitle -> {
+                        hideHeadlineCountriesFilterBy()
+                        hideHeadlinesSourceFilterBy()
+                    }
+                    parent?.selectedItem.toString() == headlinesBySubjectTitle -> {
+                        hideHeadlineCountriesFilterBy()
+                        hideHeadlinesSourceFilterBy()
+                    }
+                }
+            }
+
+        }
     }
 
     private fun addItemsListenerToCountriesSpinner(countriesResponse: CountriesResponse, pos: Int, listOfCountriesNames: ArrayList<String>) {
         val adapter = ArrayAdapter(mContext, android.R.layout.simple_spinner_dropdown_item, listOfCountriesNames)
-        if(spCountriesFilter.adapter == null) {
-            spCountriesFilter.adapter = adapter
-        }
+        spCountriesFilter.adapter = adapter
         spCountriesFilter.setSelection(0, false)
         spCountriesFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -138,10 +143,39 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
         }
     }
 
+    private fun addItemsListenerToSourceSpinner(listOfSourcesNames: ArrayList<String>, listOfSourceIdNames: ArrayList<String>) {
+        println(listOfSourcesNames[0])
+        val adapter = ArrayAdapter(mContext, android.R.layout.simple_spinner_dropdown_item, listOfSourcesNames)
+        spSourceTopHeadlinesFilter.adapter = adapter
+        spSourceTopHeadlinesFilter.setSelection(0, false)
+        spSourceTopHeadlinesFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                println("Nothing Selected")
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                when {
+                    parent?.selectedItem.toString() == listOfSourcesNames[position] ->  {
+                        topHeadlineSourceSelected = listOfSourceIdNames[position]
+                    }
+                }
+            }
+
+        }
+    }
+
+    private fun topHeadlinesSpinnersListeners(countriesResponse: CountriesResponse, pos: Int, listOfCountriesNames: ArrayList<String>, listOfSourcesNames: ArrayList<String>, listOfSourceIdNames: ArrayList<String>) {
+        addItemsToNewsFilterByTopHeadlinesListenerSpinners()
+        addItemsListenerToCountriesSpinner(countriesResponse, pos, listOfCountriesNames)
+        addItemsListenerToSourceSpinner(listOfSourcesNames, listOfSourceIdNames)
+    }
+
+
     private fun setTypeface() {
         typeface.setTypefaceForHeaderBold(tvFilterTitle,mContext)
         typeface.setTypefaceForSubHeaderBold(tvHeadlinesCountryCategory,mContext)
         typeface.setTypefaceForSubHeaderBold(tvGetTopHeadlineNews, mContext)
+        typeface.setTypefaceForSubHeaderBold(tvHeadlinesSourceCategory, mContext)
     }
 
     private fun showTopHeadlineNews() {
@@ -154,16 +188,64 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
         spGetTopHeadlineNews.visibility = View.GONE
     }
 
-    private fun showHeadlineCountries() {
+    private fun showHeadlineCountriesFilterBy() {
         tvHeadlinesCountryCategory.visibility = View.VISIBLE
         spCountriesFilter.visibility = View.VISIBLE
         btnConfirmCountryFilter.visibility = View.VISIBLE
     }
 
-    private fun hideHeadlineCountries() {
+    private fun hideHeadlineCountriesFilterBy() {
         tvHeadlinesCountryCategory.visibility = View.GONE
         spCountriesFilter.visibility = View.GONE
         btnConfirmCountryFilter.visibility = View.GONE
+    }
+
+    private fun showHeadlinesSourceFilterBy() {
+        tvHeadlinesSourceCategory.visibility = View.VISIBLE
+        spSourceTopHeadlinesFilter.visibility = View.VISIBLE
+        btnConfirmSourceTopHeadlinesFilter.visibility = View.VISIBLE
+    }
+
+    private fun hideHeadlinesSourceFilterBy() {
+        tvHeadlinesSourceCategory.visibility = View.GONE
+        spSourceTopHeadlinesFilter.visibility = View.GONE
+        btnConfirmSourceTopHeadlinesFilter.visibility = View.GONE
+    }
+
+    private fun setTopHeadlineByCountryFilters() {
+        editor.putBoolean("countryFilterByTopHeadlines",true)
+        editor.putString("countrySelectedTopHeadlines", countrySelected)
+    }
+
+    private fun removeTopHeadlineByCountryFilters() {
+        editor.putBoolean("countryFilterByTopHeadlines",false)
+        editor.putString("countrySelectedTopHeadlines", "")
+    }
+
+    private fun setTopHeadlineBySourcesFilter() {
+        editor.putBoolean("sourceFilterByTopHeadlines",true)
+        editor.putString("sourceSelectedTopHeadlines",topHeadlineSourceSelected)
+    }
+
+    private fun removeTopHeadlineBySourcesFilter() {
+        editor.putBoolean("sourceFilterByTopHeadlines",false)
+        editor.putString("sourceSelectedTopHeadlines","")
+    }
+
+    private fun clickConfirmCategoryFilter() {
+        btnConfirmCountryFilter.setOnClickListener {
+            setTopHeadlineByCountryFilters()
+            removeTopHeadlineBySourcesFilter()
+            editor.apply()
+            (mContext as MainActivity).refreshAdapterFragmentB()
+        }
+        btnConfirmSourceTopHeadlinesFilter.setOnClickListener {
+            setTopHeadlineBySourcesFilter()
+            removeTopHeadlineByCountryFilters()
+            editor.apply()
+            (mContext as MainActivity).refreshAdapterFragmentB()
+        }
+        //
     }
 
 }

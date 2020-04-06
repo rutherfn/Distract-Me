@@ -55,21 +55,41 @@ class Home : Fragment() {
                 rvHomes!!.adapter = articleAdapter
             })
         } else {
+            if(sharedPreference?.getBoolean("countryFilterByTopHeadlines",false)!!) {
                 updateTopHeadlineCountry()
                 rvHomes!!.adapter = articleAdapter
-                println("Here is the articles")
+            } else if(sharedPreference?.getBoolean("sourceFilterByTopHeadlines", false)!!) {
+                updateTopHeadlineSources()
+                rvHomes!!.adapter = articleAdapter
+            }
         }
     }
 
     private fun updateTopHeadlineCountry() {
         val newsTopHeadlineByCountry = liveData(Dispatchers.IO) {
-            val result = sharedPreference?.getString("countrySelected", "")?.let {
+            val result = sharedPreference?.getString("countrySelectedTopHeadlines", "")?.let {
                 repository.getNewsTopHeadlinesByCountry(
                     it, "92d8c9e8d1a44be58676ee20051e3c77")
             }
             emit(result)
         }
         newsTopHeadlineByCountry.observe(viewLifecycleOwner, Observer {
+            it?.let { it1 ->
+                    articleAdapter?.update(it1)
+            }
+        })
+    }
+
+    private fun updateTopHeadlineSources() {
+        val newsTopHeadlineBySources = liveData(Dispatchers.IO) {
+            val result = sharedPreference?.getString("sourceSelectedTopHeadlines", "")?.let {
+                repository.getTopHeadlinesBySource(
+                    it,
+                    "92d8c9e8d1a44be58676ee20051e3c77")
+            }
+            emit(result)
+        }
+        newsTopHeadlineBySources.observe(viewLifecycleOwner, Observer {
             it?.let { it1 -> articleAdapter?.update(it1) }
         })
     }

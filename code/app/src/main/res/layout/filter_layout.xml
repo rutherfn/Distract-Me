@@ -65,6 +65,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spGetTopHeadlineNews" />
 
+    <TextView
+        android:id="@+id/tvHeadlinesSourceCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        android:text="@string/source_categories_top_headlines"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spGetTopHeadlineNews" />
+
     <Spinner
         android:id="@+id/spCountriesFilter"
         android:layout_width="wrap_content"
@@ -76,15 +88,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvHeadlinesCountryCategory" />
 
-    <Button
-        android:id="@+id/btConfirmCountryFilter"
+    <Spinner
+        android:id="@+id/spSourceTopHeadlinesFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:visibility="gone"
+        android:layout_marginTop="10sp"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeadlinesSourceCategory" />
+
+    <Button
+    android:id="@+id/btConfirmCountryFilter"
+    android:visibility="gone"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/default_margin_or_padding"
+    android:text="Confirm"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/spCountriesFilter" />
+
+    <Button
+        android:id="@+id/btnConfirmSourceTopHeadlinesFilter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_margin_or_padding"
         android:text="Confirm"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spCountriesFilter" />
+        app:layout_constraintTop_toBottomOf="@+id/spSourceTopHeadlinesFilter" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

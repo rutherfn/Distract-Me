@@ -51,7 +51,7 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
 
     private fun viewMoreNewsImp(newsResponse: NewsResponse, pos: Int) {
         btnViewArticle.setOnClickListener {
-          //  startWebViewActivity(newsResponse, pos)
+             startWebViewActivity(newsResponse, pos)
         }
     }
 

@@ -8,7 +8,7 @@ import com.nicholasrutherford.distractme.R
 import com.nicholasrutherford.distractme.data.responses.CountriesResponse
 import com.nicholasrutherford.distractme.viewholders.FilterByViewHolder
 
-class FilterBy(private val mContext: Context, private var countriesResponse: CountriesResponse, private var listOfCountriesNames: ArrayList<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FilterBy(private val mContext: Context, private var countriesResponse: CountriesResponse, private var listOfCountriesNames: ArrayList<String>, private var listOfSourcesNames: ArrayList<String>, private var listOfSourceIdNames: ArrayList<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.filter_layout, parent, false)
@@ -21,6 +21,6 @@ class FilterBy(private val mContext: Context, private var countriesResponse: Cou
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val filterByViewHolder = holder as FilterByViewHolder
-        filterByViewHolder.main(countriesResponse,position, listOfCountriesNames)
+        filterByViewHolder.main(countriesResponse,position, listOfCountriesNames, listOfSourcesNames, listOfSourceIdNames)
     }
 }
