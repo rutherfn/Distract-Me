@@ -18,7 +18,7 @@ class Saved: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mView = inflater.inflate(R.layout.fragment_home, container, false)
+        mView = inflater.inflate(R.layout.fragment_saved, container, false)
         rvSaved = mView!!.findViewById(R.id.rvSaved)
         main()
         return mView

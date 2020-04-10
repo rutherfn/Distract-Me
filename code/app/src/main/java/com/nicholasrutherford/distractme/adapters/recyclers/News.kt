@@ -1,11 +1,11 @@
-package com.nicholasrutherford.distractme.adapters.Recyclers
+package com.nicholasrutherford.distractme.adapters.recyclers
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
-import com.nicholasrutherford.distractme.data.NewsResponse
+import com.nicholasrutherford.distractme.data.responses.NewsResponse
 import com.nicholasrutherford.distractme.viewholders.NewsHomeViewHolder
 
 class News(private val mContext: Context, private var newsResponse: NewsResponse) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -22,6 +22,8 @@ class News(private val mContext: Context, private var newsResponse: NewsResponse
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val newsHomeViewHolder = holder as NewsHomeViewHolder
         newsHomeViewHolder.main(newsResponse,position)
+        newsHomeViewHolder.ivArticle.setOnClickListener {
+        }
     }
 
     fun update(newNewsResponse: NewsResponse) {

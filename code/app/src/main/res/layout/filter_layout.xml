@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clFilter"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvFilterTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:paddingLeft="@dimen/default_margin_or_padding"
+        android:paddingRight="@dimen/default_margin_or_padding"
+        android:textSize="@dimen/default_header_tv_size"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_horizontal" />
+
+    <Spinner
+        android:id="@+id/spCategoryFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvFilterTitle" />
+
+    <TextView
+        android:id="@+id/tvGetTopHeadlineNews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/which_endpoint_top_headlines"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spCategoryFilter"
+        android:layout_marginStart="10sp" />
+
+    <Spinner
+        android:id="@+id/spGetTopHeadlineNews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvGetTopHeadlineNews" />
+
+    <TextView
+        android:id="@+id/tvHeadlinesByCountryOnly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        android:text="@string/country_categories"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spGetTopHeadlineNews" />
+
+    <TextView
+        android:id="@+id/tvHeadlinesSourceCategoryOnly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        android:text="@string/source_categories_top_headlines"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spGetTopHeadlineNews" />
+
+    <TextView
+        android:id="@+id/tvHeadlinesCountryAndCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        android:text="@string/country_categories"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spGetTopHeadlineNews" />
+
+    <TextView
+        android:id="@+id/tvHeadlinesBySubject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        android:text="@string/subject_filter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spGetTopHeadlineNews" />
+
+    <Spinner
+        android:id="@+id/spCountriesOnlyFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="10sp"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeadlinesByCountryOnly" />
+
+    <Spinner
+        android:id="@+id/spSourceTopHeadlinesFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="10sp"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeadlinesSourceCategoryOnly" />
+
+    <Spinner
+        android:id="@+id/spCountryFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="10sp"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeadlinesCountryAndCategory" />
+
+    <EditText
+        android:id="@+id/etSubjectTopHeadlines"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="10sp"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeadlinesBySubject" />
+
+    <TextView
+        android:id="@+id/tvHeadlinesCategoryAndCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        android:text="@string/categories_filter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spCountryFilter" />
+
+    <Spinner
+        android:id="@+id/spCategoryTopHeadlinesFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="10sp"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeadlinesCategoryAndCountry" />
+
+    <Button
+    android:id="@+id/btConfirmCountryFilter"
+    android:visibility="gone"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/default_margin_or_padding"
+    android:text="Confirm"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/spCountriesOnlyFilter" />
+
+    <Button
+        android:id="@+id/btnConfirmSourceTopHeadlinesFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        android:text="Confirm"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spSourceTopHeadlinesFilter" />
+
+    <Button
+        android:id="@+id/btnConfirmCategoryAndCountryFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spCategoryTopHeadlinesFilter" />
+
+    <Button
+        android:id="@+id/btnConfirmFilterSubject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etSubjectTopHeadlines" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

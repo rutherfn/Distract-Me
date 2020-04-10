@@ -10,4 +10,26 @@
     <string name="tab_text_2">Filter</string>
     <string name="tab_text_3">Saved</string>
     <string name="tab_text_4">More</string>
+    <string name="top_headlines">Top Headlines</string>
+    <string name="everything">Everything</string>
+    <string name="sources">Sources</string>
+    <string name="which_endpoint_top_headlines">What news did you want to see by top headlines?</string>
+    <string name="which_category_to_filter_by">Which category of news did you want to filter by?</string>
+    <string name="country_categories">Which country would you like to filter by?</string>
+    <string name="subject_filter">What subject would you like to filter by(enter subject below)?</string>
+    <string name="categories_filter">Which category of news would you like to filter by?</string>
+    <string name="source_categories_top_headlines">Which source would you like to filter by?</string>
+    <string name="nothing">None</string>
+    <string name="top_headlines_by_country">By Country</string>
+    <string name="top_headlines_by_source">By Source</string>
+    <string name="top_headlines_by_country_and_category">By Country And Category</string>
+    <string name="top_headlines_by_subject">By Subject</string>
+
+    <string name="business_category">business</string>
+    <string name="entertainment_category">entertainment</string>
+    <string name="general_category">general</string>
+    <string name="health_category">health</string>
+    <string name="science_category">science</string>
+    <string name="sports_category">sports</string>
+    <string name="technology_category">technology</string>
 </resources>

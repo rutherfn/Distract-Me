@@ -1,6 +1,7 @@
-package com.nicholasrutherford.distractme.data
+package com.nicholasrutherford.distractme.data.responses
 
 import com.google.gson.annotations.SerializedName
+import com.nicholasrutherford.distractme.data.Article
 
 data class NewsResponse(
     @SerializedName("articles")

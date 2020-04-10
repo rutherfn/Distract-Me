@@ -40,6 +40,10 @@ class ViewPagerAdapter (private val mFragmentManager: FragmentManager, private v
         return mContext.resources.getString(TAB_TITLES[position])
     }
 
+    override fun getItemPosition(`object`: Any): Int {
+        return POSITION_NONE
+    }
+
     private fun getHomeInstance() = Home()
 
     private fun getFilterInstance() = Filter()
@@ -48,15 +52,15 @@ class ViewPagerAdapter (private val mFragmentManager: FragmentManager, private v
 
     private fun getMoreInstance() = More()
 
-    override fun instantiateItem(container: ViewGroup, position: Int): Any { // init a fragment.
-        val `object` = super.instantiateItem(container, position)
-
-        if (`object` is Fragment) {
-            val tag = `object`.tag
-            mFragmentTags[position] = tag
-        }
-        return `object`
-    }
+//    override fun instantiateItem(container: ViewGroup, position: Int): Any { // init a fragment.
+//        val `object` = super.instantiateItem(container, position)
+//
+//        if (`object` is Fragment) {
+//            val tag = `object`.tag
+//            mFragmentTags[position] = tag
+//        }
+//        return `object`
+//    }
 
     fun getFragment(position: Int): Fragment? { // get fragment by tag
         var fragment: Fragment? = null
