@@ -49,26 +49,25 @@ class Home : Fragment() {
     }
 
     private fun showTopHeadlines() {
-        if(articleAdapter == null) {
+    //    if(articleAdapter == null) {
             newsTopHeadlines.observe(viewLifecycleOwner, Observer {
                 articleAdapter = News(context!!, it)
                 rvHomes!!.adapter = articleAdapter
             })
-        } else {
-            if (sharedPreference?.getBoolean("countryFilterByTopHeadlines",false)!!) {
-                updateTopHeadlineCountry()
-                rvHomes!!.adapter = articleAdapter
-            } else if(sharedPreference?.getBoolean("sourceFilterByTopHeadlines", false)!!) {
-                updateTopHeadlineSources()
-                rvHomes!!.adapter = articleAdapter
-            } else if(sharedPreference?.getBoolean("countryAndCategoryFilterByTopHeadlines",false)!!) {
-                updateTopHeadlinesCountryAndCategory()
-                rvHomes!!.adapter = articleAdapter
-            } else if(sharedPreference?.getBoolean("subjectFilterByTopHeadlines", false)!!) {
-                updateTopHeadlineBySubject()
-                rvHomes!!.adapter = articleAdapter
-            }
-        }
+     //  } //else {
+//            if (sharedPreference?.getBoolean("countryFilterByTopHeadlines",false)!!) {
+//                updateTopHeadlineCountry()
+//                rvHomes!!.adapter = articleAdapter
+//            } else if(sharedPreference?.getBoolean("sourceFilterByTopHeadlines", false)!!) {
+//                updateTopHeadlineSources()
+//                rvHomes!!.adapter = articleAdapter
+//            } else if(sharedPreference?.getBoolean("countryAndCategoryFilterByTopHeadlines",false)!!) {
+//                updateTopHeadlinesCountryAndCategory()
+//                rvHomes!!.adapter = articleAdapter
+//            } else if(sharedPreference?.getBoolean("subjectFilterByTopHeadlines", false)!!) {
+//                updateTopHeadlineBySubject()
+//                rvHomes!!.adapter = articleAdapter
+//        }
     }
 
     private fun updateTopHeadlineCountry() {

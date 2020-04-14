@@ -22,8 +22,6 @@ class News(private val mContext: Context, private var newsResponse: NewsResponse
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val newsHomeViewHolder = holder as NewsHomeViewHolder
         newsHomeViewHolder.main(newsResponse,position)
-        newsHomeViewHolder.ivArticle.setOnClickListener {
-        }
     }
 
     fun update(newNewsResponse: NewsResponse) {

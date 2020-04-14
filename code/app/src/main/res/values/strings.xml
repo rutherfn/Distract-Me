@@ -1,18 +1,27 @@
 <resources>
+
+    <!-- App Name String -->
     <string name="app_name">Distract Me</string>
-    <string name="app_name_splash_desc">This is the splash screen title, which is Distract Me.</string>
-    <string name="app_splash">Splash Screen For Distract Me</string>
-    <string name="title_article_desc">Here is the title for the set article.</string>
-    <string name="desc_article_text">Here is the desc for the set article.</string>
-    <string name="latin_text_filler">Lorem ipsum dolor sit amet, mel debitis eleifend tincidunt te, cu sea debet volumus argumentum. At duo rebum nominavi, te posse reprimique duo…</string>
-    <string name="like_image_view">Like Image view text.</string>
+
+    <!-- Tab Text Strings -->
     <string name="tab_text_1">News</string>
     <string name="tab_text_2">Filter</string>
     <string name="tab_text_3">Saved</string>
-    <string name="tab_text_4">More</string>
+    <string name="tab_text_4">Timer</string>
+    <string name="tab_text_5">More</string>
+
+    <!-- News Endpoint Filter By Strings -->
     <string name="top_headlines">Top Headlines</string>
     <string name="everything">Everything</string>
     <string name="sources">Sources</string>
+
+    <!-- Filter By Strings -->
+    <string name="top_headlines_by_country">By Country</string>
+    <string name="top_headlines_by_source">By Source</string>
+    <string name="top_headlines_by_country_and_category">By Country And Category</string>
+    <string name="top_headlines_by_subject">By Subject</string>
+
+    <!-- Questions For Filters Strings -->
     <string name="which_endpoint_top_headlines">What news did you want to see by top headlines?</string>
     <string name="which_category_to_filter_by">Which category of news did you want to filter by?</string>
     <string name="country_categories">Which country would you like to filter by?</string>
@@ -20,11 +29,8 @@
     <string name="categories_filter">Which category of news would you like to filter by?</string>
     <string name="source_categories_top_headlines">Which source would you like to filter by?</string>
     <string name="nothing">None</string>
-    <string name="top_headlines_by_country">By Country</string>
-    <string name="top_headlines_by_source">By Source</string>
-    <string name="top_headlines_by_country_and_category">By Country And Category</string>
-    <string name="top_headlines_by_subject">By Subject</string>
 
+    <!-- Filter Categories Strings -->
     <string name="business_category">business</string>
     <string name="entertainment_category">entertainment</string>
     <string name="general_category">general</string>
@@ -32,4 +38,22 @@
     <string name="science_category">science</string>
     <string name="sports_category">sports</string>
     <string name="technology_category">technology</string>
+
+    <!-- Elements/ Components Desc Strings -->
+    <string name="app_name_splash_desc">This is the splash screen title, which is Distract Me.</string>
+    <string name="app_splash">Splash Screen For Distract Me</string>
+    <string name="title_article_desc">Here is the title for the set article.</string>
+    <string name="like_image_view">Like Image view text.</string>
+
+    <!-- Filler Text Strings -->
+    <string name="desc_article_text">Here is the desc for the set article.</string>
+    <string name="latin_text_filler">Lorem ipsum dolor sit amet, mel debitis eleifend tincidunt te, cu sea debet volumus argumentum. At duo rebum nominavi, te posse reprimique duo…</string>
+
+    <!-- Dialog Set Timer Strings -->
+    <string name="dialog_lets_get_distracted_text">Lets Get Distracted</string>
+    <string name="dialog_how_long_text">How long did you want to be distracted for?</string>
+    <string name="dialog_current_time_set_default_text">Current Time Set: 3:22</string>
+    <string name="dialog_confirm_text">CONFIRM</string>
+    <string name="dialog_dont_show_me_again_text">DONT SHOW ME AGAIN</string>
+
 </resources>

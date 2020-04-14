@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvLetsGetDistractedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/default_header_tv_size"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/default_margin_or_padding"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        android:layout_marginLeft="@dimen/default_margin_or_padding"
+        android:text="@string/dialog_lets_get_distracted_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvHowLongDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        android:textSize="@dimen/default_body_tv_size"
+        android:text="@string/dialog_how_long_text"
+        app:layout_constraintStart_toStartOf="@+id/tvLetsGetDistractedTitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvLetsGetDistractedTitle" />
+
+    <TextView
+        android:id="@+id/tvCurrentTimeSet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        android:textStyle="bold"
+        android:textSize="@dimen/default_body_tv_size"
+        android:text="@string/dialog_current_time_set_default_text"
+        app:layout_constraintStart_toStartOf="@+id/tvHowLongDesc"
+        app:layout_constraintTop_toBottomOf="@+id/tvHowLongDesc" />
+
+    <Spinner
+        android:id="@+id/spSettingTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        app:layout_constraintStart_toStartOf="@+id/tvCurrentTimeSet"
+        app:layout_constraintTop_toBottomOf="@+id/tvCurrentTimeSet" />
+
+    <TextView
+        android:id="@+id/tvConfirmTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        android:text="@string/dialog_confirm_text"
+        app:layout_constraintStart_toStartOf="@+id/spSettingTimer"
+        app:layout_constraintTop_toBottomOf="@+id/spSettingTimer" />
+
+    <TextView
+        android:id="@+id/tvDontShowMeAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
+        android:text="@string/dialog_dont_show_me_again_text"
+        app:layout_constraintStart_toStartOf="@+id/tvConfirmTime"
+        app:layout_constraintTop_toBottomOf="@+id/tvConfirmTime" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
