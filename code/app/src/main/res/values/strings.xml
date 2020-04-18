@@ -63,6 +63,11 @@
     <string name="default_time_four">10:00</string>
     <string name="custom_time">Set Custom Time</string>
 
+    <string name="edit_btn_text">Edit</string>
+    <string name="pause_btn_text">Pause</string>
+    <string name="play_btn_text">Play</string>
+    <string name="stop_btn_text">Stop</string>
+
     <string name="time_set">Set time</string>
     <string name="cancel">Cancel</string>
     <string name="how_many_minutes_did_you_want">How many minutes do you want to set?</string>

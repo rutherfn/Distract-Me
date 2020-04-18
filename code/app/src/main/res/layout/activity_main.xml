@@ -26,10 +26,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary" />
+
+        <TextView
+            android:id="@+id/tvCurrentTimeLeft"
+            android:text="Current Time Remaning: 22:25"
+            android:background="@color/colorWhite"
+            android:textSize="@dimen/default_header_tv_size"
+            android:textColor="#000000"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+        </TextView>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.nicholasrutherford.distractme.helpers.NonSwipeViewPager
         android:id="@+id/view_pager"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
