@@ -49,6 +49,7 @@ Home.RefreshInterface{
         Timer().schedule(timerTask {
             println("Timer")
         }, 20000)
+        showTimerAlert()
         initTimer()
         startTimer()
         timerState = TimerState.Running
@@ -155,7 +156,7 @@ Home.RefreshInterface{
         val minutesUntilFinished = secondsRemaining / 60
         val secondsInMinuteUntilFinished = secondsRemaining - minutesUntilFinished * 60
         val secondsStr = secondsInMinuteUntilFinished.toString()
-        currentTimeLeft.text = "Current Time Remaining: $minutesUntilFinished:${
+        currentTimeLeft.text = "$minutesUntilFinished:${
         if(secondsStr.length == 2) secondsStr
         else "0$secondsStr"}"
     }

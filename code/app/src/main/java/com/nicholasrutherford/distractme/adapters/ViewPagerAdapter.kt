@@ -24,7 +24,7 @@ class ViewPagerAdapter (private val mFragmentManager: FragmentManager, private v
             0 -> getHomeInstance()
             1 -> getFilterInstance()
             2 -> getSavedInstance()
-            3 -> getTimerInstance()
+            3 -> getLifeAfterThisInstance()
             4 -> getMoreInstance()
             else -> getHomeInstance()
         }
@@ -50,7 +50,7 @@ class ViewPagerAdapter (private val mFragmentManager: FragmentManager, private v
 
     private fun getMoreInstance() = More()
 
-    private fun getTimerInstance() = Timer()
+    private fun getLifeAfterThisInstance() = More()
 
     fun getFragment(position: Int): Fragment? { // get fragment by tag
         var fragment: Fragment? = null
