@@ -2,7 +2,6 @@ package com.nicholasrutherford.distractme.viewholders.alerts
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.view.View
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
@@ -16,26 +15,21 @@ class TimerCustomSetViewHolder(itemView: View, private val mContext: Context) : 
     private var ivDeleteCustom: ImageView = itemView.findViewById(R.id.ivDeleteCustom)
     private var tvMinutes: TextView = itemView.findViewById(R.id.tvMinutes)
     private var spMinutes: Spinner = itemView.findViewById(R.id.spMinutes)
-    private var tvSeconds: TextView = itemView.findViewById(R.id.tvSeconds)
-    private var spSeconds: Spinner = itemView.findViewById(R.id.spSeconds)
     private var btnConfirmCustomTime: Button = itemView.findViewById(R.id.btnConfirmCustomTime)
     private val sharedPreference by lazy { mContext.getSharedPreferences("NewsSharedPreferences", Context.MODE_PRIVATE) }
     private var editor = sharedPreference.edit()
 
     private var minutes: String = ""
-    private var seconds:  String = ""
 
-    fun main(minutesList: MutableList<String>, secondsList: MutableList<String>) {
+    fun main(minutesList: MutableList<String>) {
         setTypeface()
         addItemsToMinutesSpinner(minutesList)
-        addItemsToSecondsSpinner(secondsList)
         confirmClickListener()
         closeClickListener()
     }
 
     private fun setTypeface() {
         typeface.setTypefaceForHeaderBold(tvMinutes, mContext)
-        typeface.setTypefaceForHeaderBold(tvSeconds, mContext)
         typeface.setTypefaceForBodyRegular(btnConfirmCustomTime, mContext)
     }
 
@@ -51,23 +45,6 @@ class TimerCustomSetViewHolder(itemView: View, private val mContext: Context) : 
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 minutes = parent?.selectedItem.toString()
-            }
-
-        }
-    }
-
-    private fun addItemsToSecondsSpinner(secondsList: MutableList<String>) {
-        val adapter = ArrayAdapter(mContext, android.R.layout.simple_spinner_dropdown_item, secondsList)
-        spSeconds.adapter = adapter
-
-        spSeconds.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                println("Nothing was selected")
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                seconds = parent?.selectedItem.toString()
             }
 
         }
@@ -90,11 +67,10 @@ class TimerCustomSetViewHolder(itemView: View, private val mContext: Context) : 
 
     private fun confirmClickListener() {
         btnConfirmCustomTime.setOnClickListener {
-            if(seconds == "0" && minutes == "0") {
+            if(minutes == "0") {
                 showTimeCantBeSetToZeroAlert()
             } else {
                 editor.putString("minutesSet", minutes)
-                editor.putString("secondsSet", seconds)
                 editor.apply()
                 (mContext as MainActivity).dismissCustomTimerAlert()
                 mContext.showTimerAlert()

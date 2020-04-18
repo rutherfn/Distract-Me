@@ -1,4 +1,4 @@
-package com.nicholasrutherford.distractme
+package com.nicholasrutherford.distractme.helpers
 
 import android.content.Context
 import androidx.preference.PreferenceManager

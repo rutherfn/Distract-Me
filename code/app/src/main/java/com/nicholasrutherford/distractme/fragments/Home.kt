@@ -40,7 +40,7 @@ class Home : Fragment() {
 
     private fun setUpArticleAdapter() {
         rvHomes!!.itemAnimator = null
-        rvHomes!!.layoutManager = LinearLayoutManager(context!!)
+        rvHomes!!.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private val newsTopHeadlines = liveData(Dispatchers.IO) {
@@ -51,7 +51,7 @@ class Home : Fragment() {
     private fun showTopHeadlines() {
     //    if(articleAdapter == null) {
             newsTopHeadlines.observe(viewLifecycleOwner, Observer {
-                articleAdapter = News(context!!, it)
+                articleAdapter = News(requireContext(), it)
                 rvHomes!!.adapter = articleAdapter
             })
      //  } //else {
@@ -127,7 +127,7 @@ class Home : Fragment() {
     }
 
     interface RefreshInterface {
-        fun refreshAdapterFragmentB() {}
+        fun refreshHomeAdapter() {}
     }
 
 }

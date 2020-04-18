@@ -27,25 +27,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvMinutes" />
 
-    <TextView
-        android:id="@+id/tvSeconds"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin_or_padding"
-        android:layout_marginLeft="@dimen/default_margin_or_padding"
-        android:text="@string/how_many_seconds_did_you_want"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spMinutes" />
-
-    <Spinner
-        android:id="@+id/spSeconds"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_margin_or_padding"
-        android:layout_marginLeft="@dimen/default_margin_or_padding"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSeconds" />
-
     <Button
         android:id="@+id/btnConfirmCustomTime"
         android:layout_width="wrap_content"
@@ -54,7 +35,7 @@
         android:layout_marginLeft="@dimen/default_margin_or_padding"
         android:text="@string/dialog_confirm_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spSeconds" />
+        app:layout_constraintTop_toBottomOf="@+id/spMinutes" />
 
     <ImageView
         android:id="@+id/ivDeleteCustom"

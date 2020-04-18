@@ -28,6 +28,15 @@ class TimerSetViewHolder(itemView: View, private val mContext: Context) : Recycl
     private val defaultTimeFour: String = mContext.resources.getString(R.string.default_time_four)
     private val customTime: String = mContext.resources.getString(R.string.custom_time)
 
+    // values in minutes for setting actual timer
+    // 1000
+    private var customTimeSetValue: Long = 0
+    private val defaultTimeOneValue: Long = 1000
+    private val defaultTimeTwoValue: Long = 2000
+    private val defaultTimeValueThree: Long = 5000
+    private val defaultTimeValueFour: Long = 10000
+    private var actualTimeValueSet: Long = 0
+
     // spinner setting timer array
 
     private val typeface = Typeface()
@@ -58,26 +67,71 @@ class TimerSetViewHolder(itemView: View, private val mContext: Context) : Recycl
     }
 
     private fun setMinutesAndSecondsValue() {
-        if(sharedPreference.getString("minutesSet", null) != null && sharedPreference.getString("secondsSet",null) != null) {
+        if(sharedPreference.getString("minutesSet", null) != null) {
             minutesActualValue = sharedPreference.getString("minutesSet",null)!!.toInt()
-            secondsActualValue = sharedPreference.getString("secondsSet", null)!!.toInt()
+
+            setCustomTimeValue()
 
             if(minutesActualValue <= 9) {
-                newTme = "0$minutesActualValue:$secondsActualValue"
+                newTme = "0$minutesActualValue:00"
             }
-            if(secondsActualValue <= 9) {
-                newTme = "$minutesActualValue:0$secondsActualValue"
-            }
-            if(minutesActualValue <= 9 && secondsActualValue <= 9) {
-                newTme = "0$minutesActualValue:0$secondsActualValue"
-            }
-            if(minutesActualValue > 9 && secondsActualValue > 9) {
-                newTme = "$minutesActualValue:$secondsActualValue"
+            if(minutesActualValue > 9 ) {
+                newTme = "$minutesActualValue:00"
             }
 
         } else {
             minutesActualValue = 0
-            secondsActualValue = 0
+            actualTimeValueSet = 0
+        }
+    }
+
+    private fun setCustomTimeValue() {
+        when (minutesActualValue) {
+            1 -> {
+                customTimeSetValue = 1000
+            }
+            2 -> {
+                customTimeSetValue = 2000
+            }
+            3 -> {
+                customTimeSetValue = 3000
+            }
+            4 -> {
+                customTimeSetValue = 4000
+            }
+            5 -> {
+                customTimeSetValue = 5000
+            }
+            6 -> {
+                customTimeSetValue = 6000
+            }
+            7 -> {
+                customTimeSetValue = 7000
+            }
+            8 -> {
+                customTimeSetValue = 8000
+            }
+            9 -> {
+                customTimeSetValue = 9000
+            }
+            10 -> {
+                customTimeSetValue = 1000
+            }
+            11 -> {
+                customTimeSetValue = 11000
+            }
+            12 -> {
+                customTimeSetValue = 12000
+            }
+            13 -> {
+                customTimeSetValue = 13000
+            }
+            14 -> {
+                customTimeSetValue = 14000
+            }
+            15 -> {
+                customTimeSetValue = 15000
+            }
         }
     }
 
@@ -105,18 +159,23 @@ class TimerSetViewHolder(itemView: View, private val mContext: Context) : Recycl
                 when {
                     parent?.selectedItem.toString() == newTme -> {
                         tvCurrentTimeSet.text = currentTimeSet.plus(newTme)
+                        actualTimeValueSet = customTimeSetValue
                     }
                     parent?.selectedItem.toString() == defaultTimeOne -> {
                         tvCurrentTimeSet.text = currentTimeSet.plus(defaultTimeOne)
+                        actualTimeValueSet = defaultTimeOneValue
                     }
                     parent?.selectedItem.toString() == defaultTimeTwo -> {
                         tvCurrentTimeSet.text = currentTimeSet.plus(defaultTimeTwo)
+                        actualTimeValueSet = defaultTimeTwoValue
                     }
                     parent?.selectedItem.toString() == defaultTimeThree -> {
                         tvCurrentTimeSet.text = currentTimeSet.plus(defaultTimeThree)
+                        actualTimeValueSet = defaultTimeValueThree
                     }
                     parent?.selectedItem.toString() == defaultTimeFour -> {
                         tvCurrentTimeSet.text = currentTimeSet.plus(defaultTimeFour)
+                        actualTimeValueSet = defaultTimeValueFour
                     }
                     parent?.selectedItem.toString() == customTime -> {
                         (mContext as MainActivity).dismissTimerAlert()
@@ -138,6 +197,8 @@ class TimerSetViewHolder(itemView: View, private val mContext: Context) : Recycl
     private fun confirmClickListener() {
         tvConfirmTime.setOnClickListener {
             (mContext as MainActivity).dismissTimerAlert()
+            mContext.onTimerFinished()
+            mContext.startTimeForTimer(actualTimeValueSet)
         }
     }
 

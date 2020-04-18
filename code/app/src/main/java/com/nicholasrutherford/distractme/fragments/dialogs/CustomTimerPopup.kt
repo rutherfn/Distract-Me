@@ -17,7 +17,6 @@ import kotlin.collections.ArrayList
 class CustomTimerPopup: DialogFragment() {
 
     private var minutesList: MutableList<String> = ArrayList()
-    private var secondsList: MutableList<String> = ArrayList()
 
     private var mView: View? = null
     private var rvCustomTimer: RecyclerView? = null
@@ -38,35 +37,21 @@ class CustomTimerPopup: DialogFragment() {
 
     private fun clearArrayLists() {
         minutesList.clear()
-        secondsList.clear()
     }
 
     private fun setUpTimeRecycler() {
         rvCustomTimer!!.itemAnimator = null
-        rvCustomTimer!!.layoutManager = LinearLayoutManager(context!!)
+        rvCustomTimer!!.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun initArrayList() {
-        for (m in 0..15) minutesList.add(m.toString())
-        for(s in 0.. 60) secondsList.add(s.toString())
+        for (m in 1..15) minutesList.add(m.toString())
     }
 
     private fun initAdapter() {
         initArrayList()
-        customTimerAdaptAdapter = TimerCustomAdapt(context!!,minutesList,secondsList)
+        customTimerAdaptAdapter = TimerCustomAdapt(requireContext(),minutesList)
         rvCustomTimer!!.adapter = customTimerAdaptAdapter
     }
 
-    override fun onResume() {
-        super.onResume()
-        Objects.requireNonNull(dialog)
-                ?.setOnKeyListener { _: DialogInterface?, keyCode: Int, event: KeyEvent ->
-                    if (keyCode == KeyEvent.KEYCODE_BACK) {
-                        dialog!!.dismiss()
-                        if (event.action != KeyEvent.ACTION_DOWN) return@setOnKeyListener true else { //Hide your keyboard here
-                            return@setOnKeyListener true // pretend we've processed it
-                        }
-                    } else return@setOnKeyListener false // pass on to be processed as normal
-                }
-    }
 }

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
 import com.nicholasrutherford.distractme.viewholders.alerts.TimerCustomSetViewHolder
 
-class TimerCustomAdapt(private val mContext: Context, private val minutesList: MutableList<String>, private val secondsList: MutableList<String>)
+class TimerCustomAdapt(private val mContext: Context, private val minutesList: MutableList<String>)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -21,7 +21,7 @@ class TimerCustomAdapt(private val mContext: Context, private val minutesList: M
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val alertCustomTimerSetViewHolder = holder as TimerCustomSetViewHolder
-        alertCustomTimerSetViewHolder.main(minutesList, secondsList)
+        alertCustomTimerSetViewHolder.main(minutesList)
     }
 
 }
