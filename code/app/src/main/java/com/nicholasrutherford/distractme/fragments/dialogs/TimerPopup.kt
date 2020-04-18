@@ -10,14 +10,14 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
-import com.nicholasrutherford.distractme.adapters.recyclers.alerts.TimerSet
+import com.nicholasrutherford.distractme.adapters.recyclers.alerts.TimerAdapt
 import java.util.*
 
-class SetTimer : DialogFragment() {
+class TimerPopup : DialogFragment() {
 
     private var mView: View? = null
     private var rvSetTimer: RecyclerView? = null
-    private var timerSetAdapter: TimerSet? = null
+    private var timerAdaptAdapter: TimerAdapt? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,8 +41,8 @@ class SetTimer : DialogFragment() {
     }
 
     private fun initAdapter() {
-        timerSetAdapter = TimerSet(context!!)
-        rvSetTimer!!.adapter = timerSetAdapter
+        timerAdaptAdapter = TimerAdapt(context!!)
+        rvSetTimer!!.adapter = timerAdaptAdapter
     }
 
     override fun onResume() {

@@ -56,4 +56,16 @@
     <string name="dialog_confirm_text">CONFIRM</string>
     <string name="dialog_dont_show_me_again_text">DONT SHOW ME AGAIN</string>
 
+    <!-- Default Times Strings -->
+    <string name="default_time_one">01:00</string>
+    <string name="default_time_two">02:00</string>
+    <string name="default_time_three">05:00</string>
+    <string name="default_time_four">10:00</string>
+    <string name="custom_time">Set Custom Time</string>
+
+    <string name="time_set">Set time</string>
+    <string name="cancel">Cancel</string>
+    <string name="how_many_minutes_did_you_want">How many minutes do you want to set?</string>
+    <string name="how_many_seconds_did_you_want">How many seconds do you want to set?</string>
+
 </resources>

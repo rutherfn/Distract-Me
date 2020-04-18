@@ -2,7 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:padding="@dimen/default_margin_or_padding"
     android:layout_height="wrap_content">
 
     <TextView
@@ -60,10 +62,20 @@
         android:id="@+id/tvDontShowMeAgain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/default_margin_or_padding"
         android:layout_marginTop="@dimen/default_margin_or_padding"
         android:text="@string/dialog_dont_show_me_again_text"
         app:layout_constraintStart_toStartOf="@+id/tvConfirmTime"
         app:layout_constraintTop_toBottomOf="@+id/tvConfirmTime" />
 
+    <ImageView
+        android:id="@+id/ivDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tint="@color/colorPrimary"
+        android:layout_marginRight="@dimen/default_margin_or_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_delete" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

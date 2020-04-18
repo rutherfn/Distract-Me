@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
 import com.nicholasrutherford.distractme.viewholders.alerts.TimerSetViewHolder
 
-class TimerSet(private val mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TimerAdapt(private val mContext: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.dialog_timer, parent, false)
@@ -19,7 +19,8 @@ class TimerSet(private val mContext: Context) : RecyclerView.Adapter<RecyclerVie
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        // calling main method here
+        val alertTimerSetViewHolder = holder as TimerSetViewHolder
+        alertTimerSetViewHolder.main()
     }
 
 }
