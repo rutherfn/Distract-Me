@@ -26,6 +26,7 @@ class SplashActivity : AppCompatActivity() {
     private fun startUpMainActivity() {
         val intent: Intent = Intent(applicationContext, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     private fun delayHandlerForSplash() {
