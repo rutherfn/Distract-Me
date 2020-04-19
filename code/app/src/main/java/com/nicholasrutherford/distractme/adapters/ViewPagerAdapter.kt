@@ -1,25 +1,22 @@
 package com.nicholasrutherford.distractme.adapters
 
 import android.content.Context
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.nicholasrutherford.distractme.R
-import com.nicholasrutherford.distractme.fragments.Filter
-import com.nicholasrutherford.distractme.fragments.Home
-import com.nicholasrutherford.distractme.fragments.More
-import com.nicholasrutherford.distractme.fragments.Saved
+import com.nicholasrutherford.distractme.fragments.*
 import java.util.HashMap
 
 class ViewPagerAdapter (private val mFragmentManager: FragmentManager, private val mContext: Context) : FragmentPagerAdapter(mFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     private val mFragmentTags: MutableMap<Int, String?>
-    private val TAB_TITLES = arrayOf(
+    private val tabTitles = arrayOf(
         R.string.tab_text_1,
         R.string.tab_text_2,
         R.string.tab_text_3,
-        R.string.tab_text_4
+        R.string.tab_text_4,
+            R.string.tab_text_5
     )
 
     override fun getItem(position: Int): Fragment {
@@ -27,17 +24,18 @@ class ViewPagerAdapter (private val mFragmentManager: FragmentManager, private v
             0 -> getHomeInstance()
             1 -> getFilterInstance()
             2 -> getSavedInstance()
-            3 -> getMoreInstance()
+            3 -> getLifeAfterThisInstance()
+            4 -> getMoreInstance()
             else -> getHomeInstance()
         }
     }
 
     override fun getCount(): Int {
-        return 4
+        return 5
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return mContext.resources.getString(TAB_TITLES[position])
+        return mContext.resources.getString(tabTitles[position])
     }
 
     override fun getItemPosition(`object`: Any): Int {
@@ -52,15 +50,7 @@ class ViewPagerAdapter (private val mFragmentManager: FragmentManager, private v
 
     private fun getMoreInstance() = More()
 
-//    override fun instantiateItem(container: ViewGroup, position: Int): Any { // init a fragment.
-//        val `object` = super.instantiateItem(container, position)
-//
-//        if (`object` is Fragment) {
-//            val tag = `object`.tag
-//            mFragmentTags[position] = tag
-//        }
-//        return `object`
-//    }
+    private fun getLifeAfterThisInstance() = More()
 
     fun getFragment(position: Int): Fragment? { // get fragment by tag
         var fragment: Fragment? = null

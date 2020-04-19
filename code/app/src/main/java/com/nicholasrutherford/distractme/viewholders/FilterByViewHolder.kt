@@ -405,7 +405,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
             removeTopHeadlineByCountryAndCategoriesFilters()
             removeTopHeadlineSubjectFilters()
             editor.apply()
-            (mContext as MainActivity).refreshAdapterFragmentB()
+            (mContext as MainActivity).refreshHomeAdapter()
         }
         btnConfirmSourceTopHeadlinesFilter.setOnClickListener {
             setTopHeadlineBySourcesFilters()
@@ -413,7 +413,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
             removeTopHeadlineByCountryAndCategoriesFilters()
             removeTopHeadlineSubjectFilters()
             editor.apply()
-            (mContext as MainActivity).refreshAdapterFragmentB()
+            (mContext as MainActivity).refreshHomeAdapter()
         }
         btnConfirmCategoryAndCountryFilter.setOnClickListener {
             removeTopHeadlineByCountryOnlyFilters()
@@ -421,7 +421,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
             removeTopHeadlineSubjectFilters()
             setTopHeadlineByCountryAndCategoriesFilters()
             editor.apply()
-            (mContext as MainActivity).refreshAdapterFragmentB()
+            (mContext as MainActivity).refreshHomeAdapter()
         }
         btnConfirmSubject.setOnClickListener {
             setTopHeadlineSubjectFilters()
@@ -429,7 +429,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
             removeTopHeadlineBySourcesFilters()
             removeTopHeadlineByCountryAndCategoriesFilters()
             editor.apply()
-            (mContext as MainActivity).refreshAdapterFragmentB()
+            (mContext as MainActivity).refreshHomeAdapter()
         }
 
     }

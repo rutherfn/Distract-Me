@@ -53,7 +53,7 @@ class Filter: Fragment() {
 
     private fun setUpArticleAdapter() {
         rvFilter!!.itemAnimator = null
-        rvFilter!!.layoutManager = LinearLayoutManager(context!!)
+        rvFilter!!.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun initCountriesAndSetAdapter() {
@@ -64,7 +64,7 @@ class Filter: Fragment() {
             for(i in it.countries.iterator()) {
                 listOfCountriesNames.add(i.name)
             }
-            filterByAdapter = FilterBy(context!!, it, listOfCountriesNames, listOfSourcesNames, listOfSourcesIdNames)
+            filterByAdapter = FilterBy(requireContext(), it, listOfCountriesNames, listOfSourcesNames, listOfSourcesIdNames)
             rvFilter!!.adapter = filterByAdapter
         })
     }
