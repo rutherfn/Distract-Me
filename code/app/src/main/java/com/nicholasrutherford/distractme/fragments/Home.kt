@@ -48,26 +48,39 @@ class Home : Fragment() {
         emit(result)
     }
 
+    private fun initAdapter() {
+        newsTopHeadlines.observe(viewLifecycleOwner, Observer {
+            articleAdapter = News(requireContext(), it)
+            rvHomes!!.adapter = articleAdapter
+        })
+    }
+
     private fun showTopHeadlines() {
-    //    if(articleAdapter == null) {
-            newsTopHeadlines.observe(viewLifecycleOwner, Observer {
-                articleAdapter = News(requireContext(), it)
-                rvHomes!!.adapter = articleAdapter
-            })
-     //  } //else {
-//            if (sharedPreference?.getBoolean("countryFilterByTopHeadlines",false)!!) {
-//                updateTopHeadlineCountry()
-//                rvHomes!!.adapter = articleAdapter
-//            } else if(sharedPreference?.getBoolean("sourceFilterByTopHeadlines", false)!!) {
-//                updateTopHeadlineSources()
-//                rvHomes!!.adapter = articleAdapter
-//            } else if(sharedPreference?.getBoolean("countryAndCategoryFilterByTopHeadlines",false)!!) {
-//                updateTopHeadlinesCountryAndCategory()
-//                rvHomes!!.adapter = articleAdapter
-//            } else if(sharedPreference?.getBoolean("subjectFilterByTopHeadlines", false)!!) {
-//                updateTopHeadlineBySubject()
-//                rvHomes!!.adapter = articleAdapter
-//        }
+        if (articleAdapter == null) {
+            initAdapter()
+        } else {
+            when {
+                sharedPreference?.getBoolean("countryFilterByTopHeadlines", false)!! -> {
+                    updateTopHeadlineCountry()
+                    rvHomes!!.adapter = articleAdapter
+                }
+                sharedPreference?.getBoolean("sourceFilterByTopHeadlines", false)!! -> {
+                    updateTopHeadlineSources()
+                    rvHomes!!.adapter = articleAdapter
+                }
+                sharedPreference?.getBoolean("countryAndCategoryFilterByTopHeadlines", false)!! -> {
+                    updateTopHeadlinesCountryAndCategory()
+                    rvHomes!!.adapter = articleAdapter
+                }
+                sharedPreference?.getBoolean("subjectFilterByTopHeadlines", false)!! -> {
+                    updateTopHeadlineBySubject()
+                    rvHomes!!.adapter = articleAdapter
+                }
+                else -> {
+                    initAdapter()
+                }
+            }
+        }
     }
 
     private fun updateTopHeadlineCountry() {
