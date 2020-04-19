@@ -17,7 +17,6 @@ class TimerSetViewHolder(itemView: View, private val mContext: Context) : Recycl
     private var newTme: String = ""
 
     private var minutesActualValue: Int = 0
-    private var secondsActualValue: Int = 0
 
 
 
@@ -29,15 +28,12 @@ class TimerSetViewHolder(itemView: View, private val mContext: Context) : Recycl
     private val customTime: String = mContext.resources.getString(R.string.custom_time)
 
     // values in minutes for setting actual timer
-    // 1000
     private var customTimeSetValue: Long = 0
     private val defaultTimeOneValue: Long = 1000
     private val defaultTimeTwoValue: Long = 2000
     private val defaultTimeValueThree: Long = 5000
     private val defaultTimeValueFour: Long = 10000
     private var actualTimeValueSet: Long = 0
-
-    // spinner setting timer array
 
     private val typeface = Typeface()
     private var tvLetsGetDistractedTitle: TextView = itemView.findViewById(R.id.tvLetsGetDistractedTitle)
@@ -199,11 +195,15 @@ class TimerSetViewHolder(itemView: View, private val mContext: Context) : Recycl
             (mContext as MainActivity).dismissTimerAlert()
             mContext.onTimerFinished()
             mContext.startTimeForTimer(actualTimeValueSet)
+            editor.putBoolean("doNotShowMeAgain",false)
+            editor.apply()
         }
     }
 
     private fun doNotRemindMeListener() {
         tvDontShowMeAgain.setOnClickListener {
+            editor.putBoolean("doNotShowMeAgain",true)
+            editor.apply()
             (mContext as MainActivity).dismissTimerAlert()
         }
     }

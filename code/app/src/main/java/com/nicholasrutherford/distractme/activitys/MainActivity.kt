@@ -1,6 +1,6 @@
 package com.nicholasrutherford.distractme.activitys
 
-import android.opengl.Visibility
+import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
@@ -23,6 +23,8 @@ Home.RefreshInterface{
     enum class TimerState{
         Stopped, Pause, Running
     }
+
+    private val sharedPreference by lazy { applicationContext.getSharedPreferences("NewsSharedPreferences", Context.MODE_PRIVATE) }
 
     private var typeface = Typeface()
 
@@ -49,7 +51,9 @@ Home.RefreshInterface{
         viewPager.adapter = viewPagerAdapter
         val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
-        showTimerAlert()
+        if(!sharedPreference.getBoolean("doNotShowMeAgain",false)) {
+            showTimerAlert()
+        }
     }
 
     override fun onPause() {
