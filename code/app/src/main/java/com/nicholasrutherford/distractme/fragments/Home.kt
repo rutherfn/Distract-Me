@@ -1,6 +1,6 @@
 package com.nicholasrutherford.distractme.fragments
 
-import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
@@ -16,7 +17,6 @@ import com.nicholasrutherford.distractme.network.repositoryImp.NewsRepositoryImp
 import kotlinx.coroutines.Dispatchers
 
 class Home : Fragment() {
-    private val sharedPreference by lazy { context?.getSharedPreferences("NewsSharedPreferences", Context.MODE_PRIVATE) }
     private var articleAdapter: News? = null
     private val repository: NewsRepositoryImp = NewsRepositoryImp()
     private var mView: View? = null
@@ -34,8 +34,10 @@ class Home : Fragment() {
     }
 
     private fun main() {
+        val sharedPreference = PreferenceManager.getDefaultSharedPreferences(context)
+        var editor = sharedPreference.edit()
         setUpArticleAdapter()
-        showTopHeadlines()
+        showTopHeadlines(sharedPreference)
     }
 
     private fun setUpArticleAdapter() {
@@ -48,44 +50,45 @@ class Home : Fragment() {
         emit(result)
     }
 
-    private fun initAdapter() {
+    private fun initAdapter(sharedPreferences: SharedPreferences) {
         newsTopHeadlines.observe(viewLifecycleOwner, Observer {
             articleAdapter = News(requireContext(), it)
             rvHomes!!.adapter = articleAdapter
         })
     }
 
-    private fun showTopHeadlines() {
+    private fun showTopHeadlines(sharedPreference: SharedPreferences) {
         if (articleAdapter == null) {
-            initAdapter()
+            initAdapter(sharedPreference)
         } else {
             when {
-                sharedPreference?.getBoolean("countryFilterByTopHeadlines", false)!! -> {
-                    updateTopHeadlineCountry()
+                sharedPreference.getBoolean("countryFilterByTopHeadlines", false) -> { // working
+                    updateTopHeadlineCountry(sharedPreference)
                     rvHomes!!.adapter = articleAdapter
                 }
-                sharedPreference?.getBoolean("sourceFilterByTopHeadlines", false)!! -> {
-                    updateTopHeadlineSources()
+                sharedPreference.getBoolean("sourceFilterByTopHeadlines", false) -> { // working
+                    updateTopHeadlineSources(sharedPreference)
                     rvHomes!!.adapter = articleAdapter
                 }
-                sharedPreference?.getBoolean("countryAndCategoryFilterByTopHeadlines", false)!! -> {
-                    updateTopHeadlinesCountryAndCategory()
+                sharedPreference.getBoolean("countryAndCategoryFilterByTopHeadlines", false) -> { // wprking
+                    updateTopHeadlinesCountryAndCategory(sharedPreference)
                     rvHomes!!.adapter = articleAdapter
                 }
-                sharedPreference?.getBoolean("subjectFilterByTopHeadlines", false)!! -> {
-                    updateTopHeadlineBySubject()
+                sharedPreference.getBoolean("subjectFilterByTopHeadlines", false) -> {
+                    updateTopHeadlineBySubject(sharedPreference)
                     rvHomes!!.adapter = articleAdapter
                 }
                 else -> {
-                    initAdapter()
+                    initAdapter(sharedPreference)
+                    println(sharedPreference.getBoolean("countryFilterByTopHeadlines",false))
                 }
             }
         }
     }
 
-    private fun updateTopHeadlineCountry() {
+    private fun updateTopHeadlineCountry(sharedPreference: SharedPreferences) {
         val newsTopHeadlineByCountry = liveData(Dispatchers.IO) {
-            val result = sharedPreference?.getString("countrySelectedTopHeadlines", "")?.let {
+            val result = sharedPreference.getString("countrySelectedTopHeadlines", "")?.let {
                 repository.getNewsTopHeadlinesByCountry(
                     it, "92d8c9e8d1a44be58676ee20051e3c77")
             }
@@ -98,9 +101,9 @@ class Home : Fragment() {
         })
     }
 
-    private fun updateTopHeadlineSources() {
+    private fun updateTopHeadlineSources(sharedPreference: SharedPreferences) {
         val newsTopHeadlineBySources = liveData(Dispatchers.IO) {
-            val result = sharedPreference?.getString("sourceSelectedTopHeadlines", "")?.let {
+            val result = sharedPreference.getString("sourceSelectedTopHeadlines", "")?.let {
                 repository.getTopHeadlinesBySource(
                     it,
                     "92d8c9e8d1a44be58676ee20051e3c77")
@@ -112,12 +115,12 @@ class Home : Fragment() {
         })
     }
 
-    private fun updateTopHeadlinesCountryAndCategory() {
+    private fun updateTopHeadlinesCountryAndCategory(sharedPreference: SharedPreferences) {
         val newsTopHeadlinesCountryAndCategory = liveData(Dispatchers.IO) {
-            val result = sharedPreference?.getString("countrySelectedTopHeadlinesFilterTwo", "")?.let {
+            val result = sharedPreference.getString("countrySelectedTopHeadlinesFilterTwo", "")?.let {
                 repository.getTopHeadlinesByCountryAndCategory(
                     it,
-                    sharedPreference?.getString("categorySelectedTopHeadlinesFilter","")!!,
+                    sharedPreference.getString("categorySelectedTopHeadlinesFilter","")!!,
                     "92d8c9e8d1a44be58676ee20051e3c77")
             }
             emit(result)
@@ -127,9 +130,9 @@ class Home : Fragment() {
         })
     }
 
-    private fun updateTopHeadlineBySubject() {
+    private fun updateTopHeadlineBySubject(sharedPreference: SharedPreferences) {
         val newsTopHeadlinesSubject = liveData(Dispatchers.IO) {
-            val result = sharedPreference?.getString("subjectSelectedTopHeadlines", "")?.let {
+            val result = sharedPreference.getString("subjectSelectedTopHeadlines", "")?.let {
                 repository.getTopHeadlinesBySubject(it,"92d8c9e8d1a44be58676ee20051e3c77" )
             }
             emit(result)

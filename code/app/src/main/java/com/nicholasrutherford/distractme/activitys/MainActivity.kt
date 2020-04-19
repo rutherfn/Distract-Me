@@ -24,7 +24,8 @@ Home.RefreshInterface{
         Stopped, Pause, Running
     }
 
-    private val sharedPreference by lazy { applicationContext.getSharedPreferences("NewsSharedPreferences", Context.MODE_PRIVATE) }
+//    private val sharedPreference by lazy { applicationContext?.getSharedPreferences("NewsSharedPreferences", Context.MODE_PRIVATE) }
+//    private var editor = sharedPreference?.edit()
 
     private var typeface = Typeface()
 
@@ -51,9 +52,10 @@ Home.RefreshInterface{
         viewPager.adapter = viewPagerAdapter
         val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
-        if(!sharedPreference.getBoolean("doNotShowMeAgain",false)) {
-            showTimerAlert()
-        }
+        showTimerAlert()
+//        if(!!sharedPreference?.getBoolean("doNotShowMeAgain",false)) {
+//            showTimerAlert()
+//        }
     }
 
     override fun onPause() {

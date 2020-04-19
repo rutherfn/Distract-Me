@@ -1,8 +1,10 @@
 package com.nicholasrutherford.distractme.viewholders
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.view.View
 import android.widget.*
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
 import com.nicholasrutherford.distractme.activitys.MainActivity
@@ -32,13 +34,11 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
     private val categoryTechnology: String = mContext.resources.getString(R.string.technology_category)
 
     // shared prefs
-    private val sharedPreference by lazy { mContext.getSharedPreferences("NewsSharedPreferences", Context.MODE_PRIVATE) }
-    private var editor = sharedPreference.edit()
 
     // selected items
-    private var countrySelected: String = ""
-    private var topHeadlineSourceSelected: String = ""
-    private var categorySelected: String = ""
+    private var countrySelected: String = "ae"
+    private var topHeadlineSourceSelected: String = "abc-news"
+    private var categorySelected: String = "business"
 
     // spinner arrays
     private val spinnerCategoryItems = arrayOf(nothingTitle, topHeadlinesTitle, everythingTitle, sourcesTitle)
@@ -80,11 +80,13 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
     private var btnConfirmSubject: Button = itemView.findViewById(R.id.btnConfirmFilterSubject)
 
     fun main(countriesResponse: CountriesResponse, pos: Int, listOfCountriesNames: ArrayList<String>, listOfSourcesNames: ArrayList<String>, listOfSourceIdNames: ArrayList<String>) {
+        val sharedPreference = PreferenceManager.getDefaultSharedPreferences(mContext)
+        val editor = sharedPreference.edit()
         setTypeface()
         tvFilterTitle.text = whichCategoryFilterByValue
         addItemsListenerToFilterByCategorySpinner()
         topHeadlinesSpinnersListeners(countriesResponse, pos, listOfCountriesNames, listOfSourcesNames, listOfSourceIdNames)
-        clickConfirmCategories()
+        clickConfirmCategories(sharedPreference, editor)
     }
 
     private fun setTypeface() {
@@ -234,6 +236,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                println(listOfSourceIdNames[0])
                 when {
                     parent?.selectedItem.toString() == listOfSourcesNames[position] ->  {
                         topHeadlineSourceSelected = listOfSourceIdNames[position]
@@ -267,14 +270,40 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
     private fun addItemsListenerToCategorySpinner() {
         val adapter = ArrayAdapter(mContext, android.R.layout.simple_spinner_dropdown_item, spinnerCategoryOfNewsItems )
         spCategoryTopHeadlinesFilter.adapter = adapter
-        spCategoryTopHeadlinesFilter.setSelection(0, false)
         spCategoryTopHeadlinesFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 println("Nothing Selected")
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                categorySelected == parent?.selectedItem.toString()
+                println(position)
+                when (spinnerCategoryOfNewsItems[position]) {
+                    parent?.selectedItem.toString() -> {
+                        when (position) {
+                            0 -> {
+                                categorySelected = spinnerCategoryOfNewsItems[0]
+                            }
+                            1 -> {
+                                categorySelected = spinnerCategoryOfNewsItems[1]
+                            }
+                            2 -> {
+                                categorySelected = spinnerCategoryOfNewsItems[2]
+                            }
+                            3 -> {
+                                categorySelected = spinnerCategoryOfNewsItems[3]
+                            }
+                            4 -> {
+                                categorySelected = spinnerCategoryOfNewsItems[4]
+                            }
+                            5 -> {
+                                categorySelected = spinnerCategoryOfNewsItems[5]
+                            }
+                            6 -> {
+                                categorySelected = spinnerCategoryOfNewsItems[6]
+                            }
+                        }
+                    }
+                }
             }
 
         }
@@ -356,78 +385,83 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
         btnConfirmSubject.visibility = View.GONE
     }
 
-    private fun setTopHeadlineByCountryOnlyFilters() {
+    private fun setTopHeadlineByCountryOnlyFilters(editor: SharedPreferences.Editor) {
         editor.putBoolean("countryFilterByTopHeadlines",true)
         editor.putString("countrySelectedTopHeadlines", countrySelected)
+        println(countrySelected)
     }
 
-    private fun removeTopHeadlineByCountryOnlyFilters() {
+    private fun removeTopHeadlineByCountryOnlyFilters(editor: SharedPreferences.Editor) {
         editor.putBoolean("countryFilterByTopHeadlines",false)
         editor.putString("countrySelectedTopHeadlines", "")
     }
 
-    private fun setTopHeadlineBySourcesFilters() {
+    private fun setTopHeadlineBySourcesFilters(editor: SharedPreferences.Editor) {
         editor.putBoolean("sourceFilterByTopHeadlines",true)
         editor.putString("sourceSelectedTopHeadlines",topHeadlineSourceSelected)
     }
 
-    private fun removeTopHeadlineBySourcesFilters() {
+    private fun removeTopHeadlineBySourcesFilters(editor: SharedPreferences.Editor) {
         editor.putBoolean("sourceFilterByTopHeadlines",false)
         editor.putString("sourceSelectedTopHeadlines","")
     }
 
-    private fun removeTopHeadlineByCountryAndCategoriesFilters() {
+    private fun removeTopHeadlineByCountryAndCategoriesFilters(editor: SharedPreferences.Editor) {
         editor.putBoolean("countryAndCategoryFilterByTopHeadlines",false)
         editor.putString("countrySelectedTopHeadlinesFilterTwo","")
         editor.putString("categorySelectedTopHeadlinesFilter","")
     }
 
-    private fun setTopHeadlineByCountryAndCategoriesFilters() {
+    private fun setTopHeadlineByCountryAndCategoriesFilters(editor: SharedPreferences.Editor) {
         editor.putBoolean("countryAndCategoryFilterByTopHeadlines",true)
         editor.putString("countrySelectedTopHeadlinesFilterTwo",countrySelected)
         editor.putString("categorySelectedTopHeadlinesFilter",categorySelected)
     }
 
-    private fun removeTopHeadlineSubjectFilters() {
+    private fun removeTopHeadlineSubjectFilters(editor: SharedPreferences.Editor) {
         editor.putBoolean("subjectFilterByTopHeadlines",false)
         editor.putString("subjectSelectedTopHeadlines","")
     }
 
-    private fun setTopHeadlineSubjectFilters() {
+    private fun setTopHeadlineSubjectFilters(editor: SharedPreferences.Editor) {
         editor.putBoolean("subjectFilterByTopHeadlines",true)
         editor.putString("subjectSelectedTopHeadlines",etSubjectTopHeadlines.text.toString())
+        println(etSubjectTopHeadlines.text.toString())
     }
 
-    private fun clickConfirmCategories() {
+    private fun clickConfirmCategories(sharedPreference: SharedPreferences, editor: SharedPreferences.Editor) {
         btnConfirmCountryFilter.setOnClickListener {
-            setTopHeadlineByCountryOnlyFilters()
-            removeTopHeadlineBySourcesFilters()
-            removeTopHeadlineByCountryAndCategoriesFilters()
-            removeTopHeadlineSubjectFilters()
+            setTopHeadlineByCountryOnlyFilters(editor)
+            removeTopHeadlineBySourcesFilters(editor)
+            removeTopHeadlineByCountryAndCategoriesFilters(editor)
+            removeTopHeadlineSubjectFilters(editor)
             editor.apply()
+            println(countrySelected)
+            println(sharedPreference.getString("countrySelectedTopHeadlines",""))
             (mContext as MainActivity).refreshHomeAdapter()
         }
         btnConfirmSourceTopHeadlinesFilter.setOnClickListener {
-            setTopHeadlineBySourcesFilters()
-            removeTopHeadlineByCountryOnlyFilters()
-            removeTopHeadlineByCountryAndCategoriesFilters()
-            removeTopHeadlineSubjectFilters()
+            setTopHeadlineBySourcesFilters(editor)
+            removeTopHeadlineByCountryOnlyFilters(editor)
+            removeTopHeadlineByCountryAndCategoriesFilters(editor)
+            removeTopHeadlineSubjectFilters(editor)
             editor.apply()
+            println(sharedPreference.getString("sourceSelectedTopHeadlines",""))
             (mContext as MainActivity).refreshHomeAdapter()
         }
         btnConfirmCategoryAndCountryFilter.setOnClickListener {
-            removeTopHeadlineByCountryOnlyFilters()
-            removeTopHeadlineBySourcesFilters()
-            removeTopHeadlineSubjectFilters()
-            setTopHeadlineByCountryAndCategoriesFilters()
+            removeTopHeadlineByCountryOnlyFilters(editor)
+            removeTopHeadlineBySourcesFilters(editor)
+            removeTopHeadlineSubjectFilters(editor)
+            setTopHeadlineByCountryAndCategoriesFilters(editor)
             editor.apply()
             (mContext as MainActivity).refreshHomeAdapter()
         }
         btnConfirmSubject.setOnClickListener {
-            setTopHeadlineSubjectFilters()
-            removeTopHeadlineByCountryOnlyFilters()
-            removeTopHeadlineBySourcesFilters()
-            removeTopHeadlineByCountryAndCategoriesFilters()
+            setTopHeadlineSubjectFilters(editor)
+            removeTopHeadlineByCountryOnlyFilters(editor)
+            removeTopHeadlineBySourcesFilters(editor)
+            removeTopHeadlineByCountryAndCategoriesFilters(editor)
             editor.apply()
             (mContext as MainActivity).refreshHomeAdapter()
         }
