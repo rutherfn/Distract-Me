@@ -23,6 +23,7 @@
 
     <!-- Questions For Filters Strings -->
     <string name="which_endpoint_top_headlines">What news did you want to see by top headlines?</string>
+    <string name="grab_all_news_by">Which topic would you like to grab all news by?</string>
     <string name="which_category_to_filter_by">Which category of news did you want to filter by?</string>
     <string name="country_categories">Which country would you like to filter by?</string>
     <string name="subject_filter">What subject would you like to filter by(enter subject below)?</string>

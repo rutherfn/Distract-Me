@@ -33,8 +33,6 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
     private val categorySports: String = mContext.resources.getString(R.string.sports_category)
     private val categoryTechnology: String = mContext.resources.getString(R.string.technology_category)
 
-    // shared prefs
-
     // selected items
     private var countrySelected: String = "ae"
     private var topHeadlineSourceSelected: String = "abc-news"
@@ -79,6 +77,11 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
     private var etSubjectTopHeadlines: EditText = itemView.findViewById(R.id.etSubjectTopHeadlines)
     private var btnConfirmSubject: Button = itemView.findViewById(R.id.btnConfirmFilterSubject)
 
+    // Filter by everything
+    private var tvGetEverythingNews: TextView = itemView.findViewById(R.id.tvGetEverythingNews)
+    private var etEverything: EditText = itemView.findViewById(R.id.etEverything)
+    private var btnConfirmFilterEverything: Button = itemView.findViewById(R.id.btnConfirmFilterEverything)
+
     fun main(countriesResponse: CountriesResponse, pos: Int, listOfCountriesNames: ArrayList<String>, listOfSourcesNames: ArrayList<String>, listOfSourceIdNames: ArrayList<String>) {
         val sharedPreference = PreferenceManager.getDefaultSharedPreferences(mContext)
         val editor = sharedPreference.edit()
@@ -98,6 +101,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
         typeface.setTypefaceForBodyRegularBold(btnConfirmSourceTopHeadlinesFilter, mContext)
         typeface.setTypefaceForBodyRegularBold(btnConfirmCountryFilter, mContext)
         typeface.setTypefaceForBodyRegularBold(btnConfirmSubject, mContext)
+        typeface.setTypefaceForBodyRegularBold(btnConfirmFilterEverything, mContext)
 
         // sub headers or questions
         typeface.setTypefaceForSubHeaderBold(tvHeadlinesByCountryOnly,mContext)
@@ -106,6 +110,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
         typeface.setTypefaceForSubHeaderBold(tvHeadlinesCountryAndCategory, mContext)
         typeface.setTypefaceForSubHeaderBold(tvHeadlinesCategoryAndCountry, mContext)
         typeface.setTypefaceForSubHeaderBold(tvHeadlinesBySubject, mContext)
+        typeface.setTypefaceForSubHeaderBold(tvGetEverythingNews, mContext)
     }
 
     private fun addItemsListenerToFilterByCategorySpinner() {
@@ -126,6 +131,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
                         hideHeadLineCountriesFilterBy()
                         hideHeadlineCategoryFilterBy()
                         hideHeadlineSubjectFilterBy()
+                        hideEverythingGrabNews()
                     }
                     parent?.selectedItem.toString() == topHeadlinesTitle -> {
                         showTopHeadlineNews()
@@ -134,8 +140,10 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
                         hideHeadLineCountriesFilterBy()
                         hideHeadlineCategoryFilterBy()
                         hideHeadlineSubjectFilterBy()
+                        hideEverythingGrabNews()
                     }
                     parent?.selectedItem.toString() == everythingTitle -> {
+                        showEverythingGrabNews()
                         hideTopShowHeadlineNews()
                         hideHeadlineCountriesFilterByOnly()
                         hideHeadlinesSourceFilterBy()
@@ -150,6 +158,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
                         hideHeadLineCountriesFilterBy()
                         hideHeadlineCategoryFilterBy()
                         hideHeadlineSubjectFilterBy()
+                        hideEverythingGrabNews()
                     }
                 }
             }
@@ -172,6 +181,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
                         hideHeadLineCountriesFilterBy()
                         hideHeadlineCategoryFilterBy()
                         hideHeadlineSubjectFilterBy()
+                        hideEverythingGrabNews()
                     }
                     parent?.selectedItem.toString() == headlinesByCountryTitle -> {
                         showHeadlineCountriesFilterByOnly()
@@ -179,6 +189,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
                         hideHeadLineCountriesFilterBy()
                         hideHeadlineCategoryFilterBy()
                         hideHeadlineSubjectFilterBy()
+                        hideEverythingGrabNews()
                     }
                     parent?.selectedItem.toString() == headlinesBySourceTitle -> {
                         hideHeadlineCountriesFilterByOnly()
@@ -186,6 +197,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
                         hideHeadLineCountriesFilterBy()
                         hideHeadlineCategoryFilterBy()
                         hideHeadlineSubjectFilterBy()
+                        hideEverythingGrabNews()
                     }
                     parent?.selectedItem.toString() == headlinesByCountryAndCategoryTitle -> {
                         hideHeadlineCountriesFilterByOnly()
@@ -193,6 +205,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
                         showHeadlineCountriesFilterBy()
                         hideHeadlineCategoryFilterBy()
                         hideHeadlineSubjectFilterBy()
+                        hideEverythingGrabNews()
                     }
                     parent?.selectedItem.toString() == headlinesBySubjectTitle -> {
                         hideHeadlineCountriesFilterByOnly()
@@ -200,6 +213,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
                         hideHeadLineCountriesFilterBy()
                         hideHeadlineCategoryFilterBy()
                         showHeadlineSubjectFilterBy()
+                        hideEverythingGrabNews()
                     }
                 }
             }
@@ -385,6 +399,18 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
         btnConfirmSubject.visibility = View.GONE
     }
 
+    private fun showEverythingGrabNews() {
+        tvGetEverythingNews.visibility = View.VISIBLE
+        etEverything.visibility = View.VISIBLE
+        btnConfirmFilterEverything.visibility = View.VISIBLE
+    }
+
+    private fun hideEverythingGrabNews() {
+        tvGetEverythingNews.visibility = View.GONE
+        etEverything.visibility = View.GONE
+        btnConfirmFilterEverything.visibility = View.GONE
+    }
+
     private fun setTopHeadlineByCountryOnlyFilters(editor: SharedPreferences.Editor) {
         editor.putBoolean("countryFilterByTopHeadlines",true)
         editor.putString("countrySelectedTopHeadlines", countrySelected)
@@ -426,7 +452,16 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
     private fun setTopHeadlineSubjectFilters(editor: SharedPreferences.Editor) {
         editor.putBoolean("subjectFilterByTopHeadlines",true)
         editor.putString("subjectSelectedTopHeadlines",etSubjectTopHeadlines.text.toString())
-        println(etSubjectTopHeadlines.text.toString())
+    }
+
+    private fun removeEverythingAllNewsBySubjectFilters(editor: SharedPreferences.Editor) {
+        editor.putBoolean("everythingGrabAllNewsBy",false)
+        editor.putString("everythingActualNewsString","")
+    }
+
+    private fun setEverythingAllNewsBySubjectFilters(editor: SharedPreferences.Editor) {
+        editor.putBoolean("everythingGrabAllNewsBy",true)
+        editor.putString("everythingActualNewsString",etEverything.text.toString())
     }
 
     private fun clickConfirmCategories(sharedPreference: SharedPreferences, editor: SharedPreferences.Editor) {
@@ -435,30 +470,47 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
             removeTopHeadlineBySourcesFilters(editor)
             removeTopHeadlineByCountryAndCategoriesFilters(editor)
             removeTopHeadlineSubjectFilters(editor)
+            removeEverythingAllNewsBySubjectFilters(editor)
             editor.apply()
             println(countrySelected)
             println(sharedPreference.getString("countrySelectedTopHeadlines",""))
             (mContext as MainActivity).refreshHomeAdapter()
         }
+
         btnConfirmSourceTopHeadlinesFilter.setOnClickListener {
             setTopHeadlineBySourcesFilters(editor)
             removeTopHeadlineByCountryOnlyFilters(editor)
             removeTopHeadlineByCountryAndCategoriesFilters(editor)
             removeTopHeadlineSubjectFilters(editor)
+            removeEverythingAllNewsBySubjectFilters(editor)
             editor.apply()
             println(sharedPreference.getString("sourceSelectedTopHeadlines",""))
             (mContext as MainActivity).refreshHomeAdapter()
         }
+
         btnConfirmCategoryAndCountryFilter.setOnClickListener {
             removeTopHeadlineByCountryOnlyFilters(editor)
             removeTopHeadlineBySourcesFilters(editor)
             removeTopHeadlineSubjectFilters(editor)
+            removeEverythingAllNewsBySubjectFilters(editor)
             setTopHeadlineByCountryAndCategoriesFilters(editor)
             editor.apply()
             (mContext as MainActivity).refreshHomeAdapter()
         }
+
         btnConfirmSubject.setOnClickListener {
             setTopHeadlineSubjectFilters(editor)
+            removeTopHeadlineByCountryOnlyFilters(editor)
+            removeTopHeadlineBySourcesFilters(editor)
+            removeTopHeadlineByCountryAndCategoriesFilters(editor)
+            removeEverythingAllNewsBySubjectFilters(editor)
+            editor.apply()
+            (mContext as MainActivity).refreshHomeAdapter()
+        }
+
+        btnConfirmFilterEverything.setOnClickListener {
+            setEverythingAllNewsBySubjectFilters(editor)
+            removeTopHeadlineSubjectFilters(editor)
             removeTopHeadlineByCountryOnlyFilters(editor)
             removeTopHeadlineBySourcesFilters(editor)
             removeTopHeadlineByCountryAndCategoriesFilters(editor)

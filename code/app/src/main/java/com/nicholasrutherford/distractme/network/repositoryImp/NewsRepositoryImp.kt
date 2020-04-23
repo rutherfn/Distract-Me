@@ -35,4 +35,8 @@ class NewsRepositoryImp: NewsRepository  {
     override suspend fun getCountries(): CountriesResponse {
         return clientCountries.getCountries()
     }
+
+    override suspend fun getEverything(subject: String, apiKey: String): NewsResponse {
+        return client.getEverything(subject, apiKey)
+    }
 }

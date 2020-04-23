@@ -35,4 +35,9 @@ interface NewsApiService {
     @GET("b/5e871d0c4f5f49640ba3375b")
     suspend fun getCountries(): CountriesResponse
 
+    @GET("everything")
+    suspend fun getEverything(@Query("q")subject: String,
+                               @Query("apiKey") apiKey: String):
+            NewsResponse
+
 }

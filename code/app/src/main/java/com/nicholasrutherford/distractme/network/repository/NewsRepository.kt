@@ -18,4 +18,6 @@ interface NewsRepository {
 
     suspend fun getCountries() : CountriesResponse
 
+    suspend fun getEverything(subject: String, apiKey: String) : NewsResponse
+
 }

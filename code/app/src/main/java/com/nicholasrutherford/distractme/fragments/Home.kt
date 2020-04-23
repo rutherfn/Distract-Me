@@ -78,6 +78,10 @@ class Home : Fragment() {
                     updateTopHeadlineBySubject(sharedPreference)
                     rvHomes!!.adapter = articleAdapter
                 }
+                sharedPreference.getBoolean("everythingGrabAllNewsBy",false) -> {
+                    updateEverythingAllBySubject(sharedPreference)
+                    rvHomes!!.adapter = articleAdapter
+                }
                 else -> {
                     initAdapter(sharedPreference)
                     println(sharedPreference.getBoolean("countryFilterByTopHeadlines",false))
@@ -138,6 +142,18 @@ class Home : Fragment() {
             emit(result)
         }
         newsTopHeadlinesSubject.observe(viewLifecycleOwner, Observer {
+            it?.let { it1 -> articleAdapter?.update(it1) }
+        })
+    }
+
+    private fun updateEverythingAllBySubject(sharedPreference: SharedPreferences) {
+        val everythingAllBySubject = liveData(Dispatchers.IO) {
+            val result = sharedPreference.getString("everythingActualNewsString", "")?.let {
+                repository.getEverything(it,"92d8c9e8d1a44be58676ee20051e3c77" )
+            }
+            emit(result)
+        }
+        everythingAllBySubject.observe(viewLifecycleOwner, Observer {
             it?.let { it1 -> articleAdapter?.update(it1) }
         })
     }
