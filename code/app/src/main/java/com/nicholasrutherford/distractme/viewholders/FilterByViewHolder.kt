@@ -17,7 +17,6 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
     private val nothingTitle: String = mContext.resources.getString(R.string.nothing)
     private val topHeadlinesTitle: String = mContext.resources.getString(R.string.top_headlines)
     private val everythingTitle : String = mContext.resources.getString(R.string.everything)
-    private val sourcesTitle : String = mContext.resources.getString(R.string.sources)
     private val headlinesByCountryTitle : String = mContext.resources.getString(R.string.top_headlines_by_country)
     private val headlinesBySourceTitle : String = mContext.resources.getString(R.string.top_headlines_by_source)
     private val headlinesByCountryAndCategoryTitle : String = mContext.resources.getString(R.string.top_headlines_by_country_and_category)
@@ -39,7 +38,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
     private var categorySelected: String = "business"
 
     // spinner arrays
-    private val spinnerCategoryItems = arrayOf(nothingTitle, topHeadlinesTitle, everythingTitle, sourcesTitle)
+    private val spinnerCategoryItems = arrayOf(nothingTitle, topHeadlinesTitle, everythingTitle)
     private val spinnerCategoryOfNewsItems = arrayOf(categoryBusiness, categoryEntertainment, categoryGeneral, categoryHealth,
     categoryScience, categorySports, categoryTechnology)
     private val spinnerTopHeadlinesNewsItems = arrayOf(nothingTitle, headlinesByCountryTitle,
@@ -150,15 +149,6 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
                         hideHeadLineCountriesFilterBy()
                         hideHeadlineCategoryFilterBy()
                         hideHeadlineSubjectFilterBy()
-                    }
-                    parent?.selectedItem.toString() == sourcesTitle -> {
-                        hideTopShowHeadlineNews()
-                        hideHeadlineCountriesFilterByOnly()
-                        hideHeadlinesSourceFilterBy()
-                        hideHeadLineCountriesFilterBy()
-                        hideHeadlineCategoryFilterBy()
-                        hideHeadlineSubjectFilterBy()
-                        hideEverythingGrabNews()
                     }
                 }
             }

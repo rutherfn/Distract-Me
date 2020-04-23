@@ -21,6 +21,7 @@ class Home : Fragment() {
     private val repository: NewsRepositoryImp = NewsRepositoryImp()
     private var mView: View? = null
     private var rvHomes: RecyclerView? = null
+    private var updatedNews: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,14 +31,16 @@ class Home : Fragment() {
         mView = inflater.inflate(R.layout.fragment_home, container, false)
         rvHomes = mView!!.findViewById(R.id.rvHome)
         main()
+        println(updatedNews)
         return mView
     }
 
     private fun main() {
         val sharedPreference = PreferenceManager.getDefaultSharedPreferences(context)
-        var editor = sharedPreference.edit()
+        val editor = sharedPreference.edit()
         setUpArticleAdapter()
         showTopHeadlines(sharedPreference)
+        checkUpdatedNews(editor)
     }
 
     private fun setUpArticleAdapter() {
@@ -62,15 +65,15 @@ class Home : Fragment() {
             initAdapter(sharedPreference)
         } else {
             when {
-                sharedPreference.getBoolean("countryFilterByTopHeadlines", false) -> { // working
+                sharedPreference.getBoolean("countryFilterByTopHeadlines", false) -> {
                     updateTopHeadlineCountry(sharedPreference)
                     rvHomes!!.adapter = articleAdapter
                 }
-                sharedPreference.getBoolean("sourceFilterByTopHeadlines", false) -> { // working
+                sharedPreference.getBoolean("sourceFilterByTopHeadlines", false) -> {
                     updateTopHeadlineSources(sharedPreference)
                     rvHomes!!.adapter = articleAdapter
                 }
-                sharedPreference.getBoolean("countryAndCategoryFilterByTopHeadlines", false) -> { // wprking
+                sharedPreference.getBoolean("countryAndCategoryFilterByTopHeadlines", false) -> {
                     updateTopHeadlinesCountryAndCategory(sharedPreference)
                     rvHomes!!.adapter = articleAdapter
                 }
@@ -84,13 +87,24 @@ class Home : Fragment() {
                 }
                 else -> {
                     initAdapter(sharedPreference)
-                    println(sharedPreference.getBoolean("countryFilterByTopHeadlines",false))
                 }
             }
         }
     }
 
+    private fun checkUpdatedNews(editor:SharedPreferences.Editor) {
+        if(!updatedNews) {
+            editor.putBoolean("countryFilterByTopHeadlines",false)
+            editor.putBoolean("sourceFilterByTopHeadlines", false)
+            editor.putBoolean("countryAndCategoryFilterByTopHeadlines", false)
+            editor.putBoolean("subjectFilterByTopHeadlines", false)
+            editor.putBoolean("everythingGrabAllNewsBy", false)
+            editor.apply()
+        }
+    }
+
     private fun updateTopHeadlineCountry(sharedPreference: SharedPreferences) {
+        updatedNews = true
         val newsTopHeadlineByCountry = liveData(Dispatchers.IO) {
             val result = sharedPreference.getString("countrySelectedTopHeadlines", "")?.let {
                 repository.getNewsTopHeadlinesByCountry(
@@ -106,6 +120,7 @@ class Home : Fragment() {
     }
 
     private fun updateTopHeadlineSources(sharedPreference: SharedPreferences) {
+        updatedNews = true
         val newsTopHeadlineBySources = liveData(Dispatchers.IO) {
             val result = sharedPreference.getString("sourceSelectedTopHeadlines", "")?.let {
                 repository.getTopHeadlinesBySource(
@@ -120,6 +135,7 @@ class Home : Fragment() {
     }
 
     private fun updateTopHeadlinesCountryAndCategory(sharedPreference: SharedPreferences) {
+        updatedNews = true
         val newsTopHeadlinesCountryAndCategory = liveData(Dispatchers.IO) {
             val result = sharedPreference.getString("countrySelectedTopHeadlinesFilterTwo", "")?.let {
                 repository.getTopHeadlinesByCountryAndCategory(
@@ -135,6 +151,7 @@ class Home : Fragment() {
     }
 
     private fun updateTopHeadlineBySubject(sharedPreference: SharedPreferences) {
+        updatedNews = true
         val newsTopHeadlinesSubject = liveData(Dispatchers.IO) {
             val result = sharedPreference.getString("subjectSelectedTopHeadlines", "")?.let {
                 repository.getTopHeadlinesBySubject(it,"92d8c9e8d1a44be58676ee20051e3c77" )
@@ -147,6 +164,7 @@ class Home : Fragment() {
     }
 
     private fun updateEverythingAllBySubject(sharedPreference: SharedPreferences) {
+        updatedNews = true
         val everythingAllBySubject = liveData(Dispatchers.IO) {
             val result = sharedPreference.getString("everythingActualNewsString", "")?.let {
                 repository.getEverything(it,"92d8c9e8d1a44be58676ee20051e3c77" )

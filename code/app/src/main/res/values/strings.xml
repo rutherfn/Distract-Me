@@ -13,7 +13,6 @@
     <!-- News Endpoint Filter By Strings -->
     <string name="top_headlines">Top Headlines</string>
     <string name="everything">Everything</string>
-    <string name="sources">Sources</string>
 
     <!-- Filter By Strings -->
     <string name="top_headlines_by_country">By Country</string>
