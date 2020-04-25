@@ -14,7 +14,6 @@ import kotlin.collections.ArrayList
 class CustomTimerPopup: DialogFragment() {
 
     private var minutesList: MutableList<String> = ArrayList()
-
     private var mView: View? = null
     private var rvCustomTimer: RecyclerView? = null
     private var customTimerAdaptAdapter: TimerCustomAdapt? = null
@@ -27,13 +26,10 @@ class CustomTimerPopup: DialogFragment() {
     }
 
     private fun main() {
-        clearArrayLists()
+        minutesList.clear()
+
         setUpTimeRecycler()
         initAdapter()
-    }
-
-    private fun clearArrayLists() {
-        minutesList.clear()
     }
 
     private fun setUpTimeRecycler() {

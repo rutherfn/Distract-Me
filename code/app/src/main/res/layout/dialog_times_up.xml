@@ -2,7 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:paddingBottom="@dimen/default_margin_or_padding"
     android:layout_height="wrap_content">
 
     <TextView
@@ -11,6 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_margin_or_padding"
         android:layout_marginTop="@dimen/default_margin_or_padding"
+        tools:ignore="RtlSymmetry"
+        android:paddingLeft="@dimen/default_margin_or_padding"
+        android:paddingStart="@dimen/default_margin_or_padding"
         android:layout_marginLeft="@dimen/default_margin_or_padding"
         android:textSize="@dimen/default_header_tv_size"
         android:text="@string/times_up_text"
@@ -21,9 +26,9 @@
         android:id="@+id/tvContinueOrNot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/default_margin_or_padding"
-        android:layout_marginTop="@dimen/default_margin_or_padding"
         android:layout_marginLeft="@dimen/default_margin_or_padding"
+        android:padding="@dimen/default_margin_or_padding"
+        android:layout_marginTop="@dimen/default_margin_or_padding"
         android:textSize="@dimen/default_body_tv_size"
         android:text="@string/times_up_desc"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,17 +41,23 @@
         android:layout_marginStart="@dimen/default_margin_or_padding"
         android:layout_marginTop="@dimen/default_margin_or_padding"
         android:layout_marginLeft="@dimen/default_margin_or_padding"
+        tools:ignore="RtlSymmetry"
+        android:paddingLeft="@dimen/default_margin_or_padding"
+        android:paddingStart="@dimen/default_margin_or_padding"
         android:text="@string/times_up_yes_extend"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvContinueOrNot" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvNoExtend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_margin_or_padding"
         android:layout_marginTop="@dimen/default_margin_or_padding"
         android:layout_marginLeft="@dimen/default_margin_or_padding"
+        tools:ignore="RtlSymmetry"
+        android:paddingLeft="@dimen/default_margin_or_padding"
+        android:paddingStart="@dimen/default_margin_or_padding"
         android:text="@string/times_up_no_extend"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvYesExtend" />

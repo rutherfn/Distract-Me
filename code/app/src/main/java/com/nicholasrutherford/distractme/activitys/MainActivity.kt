@@ -12,6 +12,7 @@ import com.nicholasrutherford.distractme.R
 import com.nicholasrutherford.distractme.adapters.ViewPagerAdapter
 import com.nicholasrutherford.distractme.fragments.Home
 import com.nicholasrutherford.distractme.fragments.dialogs.CustomTimerPopup
+import com.nicholasrutherford.distractme.fragments.dialogs.TimerExtendPopup
 import com.nicholasrutherford.distractme.fragments.dialogs.TimerPopup
 import com.nicholasrutherford.distractme.helpers.Typeface
 
@@ -33,6 +34,7 @@ Home.RefreshInterface{
     private lateinit var viewPager: ViewPager
     private val setTimerAlert = TimerPopup()
     private val setCustomTimerAlert = CustomTimerPopup()
+    private val extendTimerAlert = TimerExtendPopup()
     private val fm = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +66,10 @@ Home.RefreshInterface{
         setTimerAlert.show(fm, "set timer alert")
     }
 
+    fun showExtendTimerAlert() {
+        extendTimerAlert.show(fm, "extend timer alert")
+    }
+
     fun showCustomTimerAlert() {
         setCustomTimerAlert.show(fm, "set custom timer alert")
     }
@@ -74,6 +80,10 @@ Home.RefreshInterface{
 
     fun dismissCustomTimerAlert() {
         setCustomTimerAlert.dismiss()
+    }
+
+    fun dismissExtendTimerAlert() {
+        extendTimerAlert.dismiss()
     }
 
     private fun initTimer() {
@@ -129,6 +139,9 @@ Home.RefreshInterface{
             override fun onTick(millisUntilFinished: Long) {
                 secondsRemaining = millisUntilFinished / 1000
                 updateCountDownUI()
+                if(secondsRemaining == 0L) {
+                    showExtendTimerAlert()
+                }
             }
         }.start()
     }
