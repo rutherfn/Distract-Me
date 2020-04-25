@@ -17,7 +17,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 class NewsHomeViewHolder(itemView: View, private val mContext: Context) : RecyclerView.ViewHolder(itemView) {
 
     private val typeface = Typeface()
-    var ivArticle: CircleImageView = itemView.findViewById(R.id.ivArticle)
+    private var ivArticle: CircleImageView = itemView.findViewById(R.id.ivArticle)
     private var tvArticleTitle: TextView = itemView.findViewById(R.id.tvArticleTitle)
     private var tvArticleDesc: TextView = itemView.findViewById(R.id.tvArticleDesc)
     private var tvAuthorTitle: TextView = itemView.findViewById(R.id.tvAuthorTitle)

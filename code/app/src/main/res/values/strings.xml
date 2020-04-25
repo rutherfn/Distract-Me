@@ -73,4 +73,9 @@
     <string name="how_many_minutes_did_you_want">How many minutes do you want to set?</string>
     <string name="how_many_seconds_did_you_want">How many seconds do you want to set?</string>
 
+    <string name="times_up_text">Times Up!</string>
+    <string name="times_up_desc">Sorry you have ran out of time! Would you like to extend your time? If you select NO the app will close!</string>
+    <string name="times_up_yes_extend">YES</string>
+    <string name="times_up_no_extend">NO</string>
+
 </resources>
