@@ -7,12 +7,13 @@ import com.nicholasrutherford.distractme.activitys.MainActivity
 class PrefUtil {
     companion object {
 
+        private const val PREVIOUS_TIMER_LENGTH_SECONDS_ID = "com.nicholasrutherford.distractme.timer.previous_timer_length_seconds"
+        private const val TIMER_STATE_ID = "com.nicholasrutherford.distractme.timer.timer_state"
+        private const val SECONDS_REMAINING_ID = "com.nicholasrutherford.distractme.timer.seconds_remaining"
+
         fun getTimerLength(context: Context): Int{
-            //placeholder
             return 1
         }
-
-        private const val PREVIOUS_TIMER_LENGTH_SECONDS_ID = "com.nicholasrutherford.distractme.timer.previous_timer_length_seconds"
 
         fun getPreviousTimerLengthSeconds(context: Context): Long{
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -24,9 +25,6 @@ class PrefUtil {
             editor.putLong(PREVIOUS_TIMER_LENGTH_SECONDS_ID, seconds)
             editor.apply()
         }
-
-
-        private const val TIMER_STATE_ID = "com.nicholasrutherford.distractme.timer.timer_state"
 
         fun getTimerState(context: Context): MainActivity.TimerState{
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
@@ -41,9 +39,6 @@ class PrefUtil {
             editor.apply()
         }
 
-
-        private const val SECONDS_REMAINING_ID = "com.nicholasrutherford.distractme.timer.seconds_remaining"
-
         fun getSecondsRemaining(context: Context): Long{
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
             return preferences.getLong(SECONDS_REMAINING_ID, 0)
@@ -54,5 +49,7 @@ class PrefUtil {
             editor.putLong(SECONDS_REMAINING_ID, seconds)
             editor.apply()
         }
+
     }
+
 }

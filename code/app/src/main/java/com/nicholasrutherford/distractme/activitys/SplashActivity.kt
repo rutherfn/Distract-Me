@@ -20,11 +20,13 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         delayHandlerForSplash()
-        setTypeFaceOfSplashTitle()
+        typeface.setTypefaceForHeaderBold(tvSplashTitle,applicationContext)
+        typeface.setTypefaceForHeaderBold(tvSplashTitle,applicationContext)
     }
 
     private fun startUpMainActivity() {
         val intent: Intent = Intent(applicationContext, MainActivity::class.java)
+
         startActivity(intent)
         finish()
     }
@@ -35,9 +37,5 @@ class SplashActivity : AppCompatActivity() {
             startUpMainActivity()
         }, 5000)
         }
-
-    private fun setTypeFaceOfSplashTitle() {
-        typeface.setTypefaceForHeaderBold(tvSplashTitle,applicationContext)
-    }
 
     }

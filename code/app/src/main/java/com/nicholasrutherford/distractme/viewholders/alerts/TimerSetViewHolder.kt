@@ -15,10 +15,7 @@ class TimerSetViewHolder(itemView: View, private val mContext: Context) : Recycl
     private val sharedPreference by lazy { mContext.getSharedPreferences("NewsSharedPreferences", Context.MODE_PRIVATE) }
     private var editor = sharedPreference.edit()
     private var newTme: String = ""
-
     private var minutesActualValue: Int = 0
-
-
 
     // string values timers
     private val defaultTimeOne: String = mContext.resources.getString(R.string.default_time_one)
@@ -139,7 +136,6 @@ class TimerSetViewHolder(itemView: View, private val mContext: Context) : Recycl
             val spinnerSettingTimerItems = arrayOf(defaultTimeOne, defaultTimeTwo, defaultTimeThree, defaultTimeFour, customTime)
             addItemsToSettingTimerSpinner(spinnerSettingTimerItems)
         }
-
     }
 
     private fun addItemsToSettingTimerSpinner(spinnerSettingTimerItems: Array<String>) {
@@ -180,7 +176,6 @@ class TimerSetViewHolder(itemView: View, private val mContext: Context) : Recycl
                     }
                 }
             }
-
         }
     }
 
@@ -213,4 +208,5 @@ class TimerSetViewHolder(itemView: View, private val mContext: Context) : Recycl
         editor.putString("secondsSet", null)
         editor.apply()
     }
+
 }

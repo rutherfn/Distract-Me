@@ -10,39 +10,35 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
-import com.nicholasrutherford.distractme.adapters.recyclers.alerts.TimerAdapt
+import com.nicholasrutherford.distractme.adapters.recyclers.alerts.TimerExtendAdapt
 import java.util.*
 
-class TimerPopup : DialogFragment() {
+class TimerExtendPopup : DialogFragment() {
 
     private var mView: View? = null
-    private var rvSetTimer: RecyclerView? = null
-    private var timerAdaptAdapter: TimerAdapt? = null
+    private var rvTimerExtend: RecyclerView? = null
+    private var timerExtendAdapt: TimerExtendAdapt? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        mView = inflater.inflate(R.layout.fragment_dialog_set_timer, container, false)
-        rvSetTimer = mView!!.findViewById(R.id.rvSetTimer)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mView = inflater.inflate(R.layout.fragment_dialog_extend_timer, container, false)
+        rvTimerExtend = mView!!.findViewById(R.id.rvExtendTimer)
         main()
         return mView
     }
 
     private fun main() {
-        setUpTimerRecycler()
+        setUpExtendTimerRecycler()
         initAdapter()
     }
 
-    private fun setUpTimerRecycler() {
-        rvSetTimer!!.itemAnimator = null
-        rvSetTimer!!.layoutManager = LinearLayoutManager(requireContext())
+    private fun setUpExtendTimerRecycler() {
+        rvTimerExtend!!.itemAnimator = null
+        rvTimerExtend!!.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun initAdapter() {
-        timerAdaptAdapter = TimerAdapt(requireContext())
-        rvSetTimer!!.adapter = timerAdaptAdapter
+        timerExtendAdapt = TimerExtendAdapt(requireContext())
+        rvTimerExtend!!.adapter = timerExtendAdapt
     }
 
     override fun onResume() {

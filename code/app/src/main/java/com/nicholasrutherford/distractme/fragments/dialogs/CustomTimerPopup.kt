@@ -1,8 +1,6 @@
 package com.nicholasrutherford.distractme.fragments.dialogs
 
-import android.content.DialogInterface
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.DialogFragment
@@ -11,13 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
 import com.nicholasrutherford.distractme.adapters.recyclers.alerts.TimerCustomAdapt
-import java.util.*
 import kotlin.collections.ArrayList
 
 class CustomTimerPopup: DialogFragment() {
 
     private var minutesList: MutableList<String> = ArrayList()
-
     private var mView: View? = null
     private var rvCustomTimer: RecyclerView? = null
     private var customTimerAdaptAdapter: TimerCustomAdapt? = null
@@ -30,13 +26,10 @@ class CustomTimerPopup: DialogFragment() {
     }
 
     private fun main() {
-        clearArrayLists()
+        minutesList.clear()
+
         setUpTimeRecycler()
         initAdapter()
-    }
-
-    private fun clearArrayLists() {
-        minutesList.clear()
     }
 
     private fun setUpTimeRecycler() {

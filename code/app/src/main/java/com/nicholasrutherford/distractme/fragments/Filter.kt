@@ -61,9 +61,11 @@ class Filter: Fragment() {
             if(listOfCountriesNames.size > 0) {
                 listOfCountriesNames.clear()
             }
+
             for(i in it.countries.iterator()) {
                 listOfCountriesNames.add(i.name)
             }
+
             filterByAdapter = FilterBy(requireContext(), it, listOfCountriesNames, listOfSourcesNames, listOfSourcesIdNames)
             rvFilter!!.adapter = filterByAdapter
         })

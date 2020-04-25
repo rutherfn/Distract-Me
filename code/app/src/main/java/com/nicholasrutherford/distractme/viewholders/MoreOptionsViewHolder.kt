@@ -6,7 +6,6 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
-import com.nicholasrutherford.distractme.activitys.MainActivity
 import com.nicholasrutherford.distractme.helpers.Typeface
 
 class MoreOptionsViewHolder(itemView: View, private val mContext: Context) : RecyclerView.ViewHolder(itemView) {
