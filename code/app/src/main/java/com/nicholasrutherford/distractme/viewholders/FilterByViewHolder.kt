@@ -88,7 +88,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
         tvFilterTitle.text = whichCategoryFilterByValue
         addItemsListenerToFilterByCategorySpinner()
         topHeadlinesSpinnersListeners(countriesResponse, pos, listOfCountriesNames, listOfSourcesNames, listOfSourceIdNames)
-        clickConfirmCategories(sharedPreference, editor)
+        clickConfirmCategories(editor)
     }
 
     private fun setTypeface() {
@@ -207,7 +207,6 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
                     }
                 }
             }
-
         }
     }
 
@@ -215,6 +214,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
         val adapter = ArrayAdapter(mContext, android.R.layout.simple_spinner_dropdown_item, listOfCountriesNames)
         spCountriesOnlyFilter.adapter = adapter
         spCountriesOnlyFilter.setSelection(0, false)
+
         spCountriesOnlyFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 println("Nothing Selected")
@@ -234,6 +234,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
         val adapter = ArrayAdapter(mContext, android.R.layout.simple_spinner_dropdown_item, listOfSourcesNames)
         spSourceTopHeadlinesFilter.adapter = adapter
         spSourceTopHeadlinesFilter.setSelection(0, false)
+
         spSourceTopHeadlinesFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 println("Nothing Selected")
@@ -255,6 +256,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
         val adapter = ArrayAdapter(mContext, android.R.layout.simple_spinner_dropdown_item, listOfCountriesNames)
         spCountryFilter.adapter = adapter
         spCountryFilter.setSelection(0, false)
+
         spCountryFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 println("Nothing Selected")
@@ -274,6 +276,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
     private fun addItemsListenerToCategorySpinner() {
         val adapter = ArrayAdapter(mContext, android.R.layout.simple_spinner_dropdown_item, spinnerCategoryOfNewsItems )
         spCategoryTopHeadlinesFilter.adapter = adapter
+
         spCategoryTopHeadlinesFilter.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 println("Nothing Selected")
@@ -404,7 +407,6 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
     private fun setTopHeadlineByCountryOnlyFilters(editor: SharedPreferences.Editor) {
         editor.putBoolean("countryFilterByTopHeadlines",true)
         editor.putString("countrySelectedTopHeadlines", countrySelected)
-        println(countrySelected)
     }
 
     private fun removeTopHeadlineByCountryOnlyFilters(editor: SharedPreferences.Editor) {
@@ -454,58 +456,76 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
         editor.putString("everythingActualNewsString",etEverything.text.toString())
     }
 
-    private fun clickConfirmCategories(sharedPreference: SharedPreferences, editor: SharedPreferences.Editor) {
+    private fun countryFilter(editor: SharedPreferences.Editor) {
+        setTopHeadlineByCountryOnlyFilters(editor)
+        removeTopHeadlineBySourcesFilters(editor)
+        removeTopHeadlineByCountryAndCategoriesFilters(editor)
+        removeTopHeadlineSubjectFilters(editor)
+        removeEverythingAllNewsBySubjectFilters(editor)
+        editor.apply()
+        (mContext as MainActivity).refreshHomeAdapter()
+    }
+
+    private fun sourceTopHeadlinesFilter(editor: SharedPreferences.Editor) {
+        setTopHeadlineBySourcesFilters(editor)
+        removeTopHeadlineByCountryOnlyFilters(editor)
+        removeTopHeadlineByCountryAndCategoriesFilters(editor)
+        removeTopHeadlineSubjectFilters(editor)
+        removeEverythingAllNewsBySubjectFilters(editor)
+        editor.apply()
+        (mContext as MainActivity).refreshHomeAdapter()
+    }
+
+    private fun categoryAndCountryFilter(editor: SharedPreferences.Editor) {
+        removeTopHeadlineByCountryOnlyFilters(editor)
+        removeTopHeadlineBySourcesFilters(editor)
+        removeTopHeadlineSubjectFilters(editor)
+        removeEverythingAllNewsBySubjectFilters(editor)
+        setTopHeadlineByCountryAndCategoriesFilters(editor)
+        editor.apply()
+        (mContext as MainActivity).refreshHomeAdapter()
+    }
+
+    private fun subjectFilter(editor: SharedPreferences.Editor) {
+        setTopHeadlineSubjectFilters(editor)
+        removeTopHeadlineByCountryOnlyFilters(editor)
+        removeTopHeadlineBySourcesFilters(editor)
+        removeTopHeadlineByCountryAndCategoriesFilters(editor)
+        removeEverythingAllNewsBySubjectFilters(editor)
+        editor.apply()
+        (mContext as MainActivity).refreshHomeAdapter()
+    }
+
+    private fun everythingFilter(editor: SharedPreferences.Editor) {
+        setEverythingAllNewsBySubjectFilters(editor)
+        removeTopHeadlineSubjectFilters(editor)
+        removeTopHeadlineByCountryOnlyFilters(editor)
+        removeTopHeadlineBySourcesFilters(editor)
+        removeTopHeadlineByCountryAndCategoriesFilters(editor)
+        editor.apply()
+        (mContext as MainActivity).refreshHomeAdapter()
+    }
+
+
+    private fun clickConfirmCategories(editor: SharedPreferences.Editor) {
         btnConfirmCountryFilter.setOnClickListener {
-            setTopHeadlineByCountryOnlyFilters(editor)
-            removeTopHeadlineBySourcesFilters(editor)
-            removeTopHeadlineByCountryAndCategoriesFilters(editor)
-            removeTopHeadlineSubjectFilters(editor)
-            removeEverythingAllNewsBySubjectFilters(editor)
-            editor.apply()
-            println(countrySelected)
-            println(sharedPreference.getString("countrySelectedTopHeadlines",""))
-            (mContext as MainActivity).refreshHomeAdapter()
+            countryFilter(editor)
         }
 
         btnConfirmSourceTopHeadlinesFilter.setOnClickListener {
-            setTopHeadlineBySourcesFilters(editor)
-            removeTopHeadlineByCountryOnlyFilters(editor)
-            removeTopHeadlineByCountryAndCategoriesFilters(editor)
-            removeTopHeadlineSubjectFilters(editor)
-            removeEverythingAllNewsBySubjectFilters(editor)
-            editor.apply()
-            println(sharedPreference.getString("sourceSelectedTopHeadlines",""))
-            (mContext as MainActivity).refreshHomeAdapter()
+            sourceTopHeadlinesFilter(editor)
         }
 
         btnConfirmCategoryAndCountryFilter.setOnClickListener {
-            removeTopHeadlineByCountryOnlyFilters(editor)
-            removeTopHeadlineBySourcesFilters(editor)
-            removeTopHeadlineSubjectFilters(editor)
-            removeEverythingAllNewsBySubjectFilters(editor)
-            setTopHeadlineByCountryAndCategoriesFilters(editor)
-            editor.apply()
-            (mContext as MainActivity).refreshHomeAdapter()
+            categoryAndCountryFilter(editor)
         }
 
         btnConfirmSubject.setOnClickListener {
-            setTopHeadlineSubjectFilters(editor)
-            removeTopHeadlineByCountryOnlyFilters(editor)
-            removeTopHeadlineBySourcesFilters(editor)
-            removeTopHeadlineByCountryAndCategoriesFilters(editor)
-            removeEverythingAllNewsBySubjectFilters(editor)
-            editor.apply()
-            (mContext as MainActivity).refreshHomeAdapter()
+            subjectFilter(editor)
         }
 
         btnConfirmFilterEverything.setOnClickListener {
-            setEverythingAllNewsBySubjectFilters(editor)
-            removeTopHeadlineSubjectFilters(editor)
-            removeTopHeadlineByCountryOnlyFilters(editor)
-            removeTopHeadlineBySourcesFilters(editor)
-            removeTopHeadlineByCountryAndCategoriesFilters(editor)
-            editor.apply()
-            (mContext as MainActivity).refreshHomeAdapter()
+            everythingFilter(editor)
         }
 
     }

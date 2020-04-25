@@ -37,11 +37,11 @@ class TimerPopup : DialogFragment() {
 
     private fun setUpTimerRecycler() {
         rvSetTimer!!.itemAnimator = null
-        rvSetTimer!!.layoutManager = LinearLayoutManager(context!!)
+        rvSetTimer!!.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun initAdapter() {
-        timerAdaptAdapter = TimerAdapt(context!!)
+        timerAdaptAdapter = TimerAdapt(requireContext())
         rvSetTimer!!.adapter = timerAdaptAdapter
     }
 

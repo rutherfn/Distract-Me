@@ -30,6 +30,7 @@ class More: Fragment() {
 
     private fun main() {
         optionsList.clear()
+
         setUpArticleAdapter()
         initOptionsList()
         initAdapter()
@@ -37,7 +38,7 @@ class More: Fragment() {
 
     private fun setUpArticleAdapter() {
         rvMore!!.itemAnimator = null
-        rvMore!!.layoutManager = LinearLayoutManager(context!!)
+        rvMore!!.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun initOptionsList() {
@@ -49,7 +50,7 @@ class More: Fragment() {
     }
 
     private fun initAdapter() {
-        moreOptionsAdapter = MoreOptions(context!!, optionsList)
+        moreOptionsAdapter = MoreOptions(requireContext(), optionsList)
         rvMore!!.adapter = moreOptionsAdapter
     }
 

@@ -31,13 +31,13 @@ class Home : Fragment() {
         mView = inflater.inflate(R.layout.fragment_home, container, false)
         rvHomes = mView!!.findViewById(R.id.rvHome)
         main()
-        println(updatedNews)
         return mView
     }
 
     private fun main() {
         val sharedPreference = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = sharedPreference.edit()
+
         setUpArticleAdapter()
         showTopHeadlines(sharedPreference)
         checkUpdatedNews(editor)
@@ -174,6 +174,7 @@ class Home : Fragment() {
         everythingAllBySubject.observe(viewLifecycleOwner, Observer {
             it?.let { it1 -> articleAdapter?.update(it1) }
         })
+
     }
 
     interface RefreshInterface {

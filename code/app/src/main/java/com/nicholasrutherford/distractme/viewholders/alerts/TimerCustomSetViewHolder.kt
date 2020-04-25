@@ -18,7 +18,6 @@ class TimerCustomSetViewHolder(itemView: View, private val mContext: Context) : 
     private var btnConfirmCustomTime: Button = itemView.findViewById(R.id.btnConfirmCustomTime)
     private val sharedPreference by lazy { mContext.getSharedPreferences("NewsSharedPreferences", Context.MODE_PRIVATE) }
     private var editor = sharedPreference.edit()
-
     private var minutes: String = ""
 
     fun main(minutesList: MutableList<String>) {
@@ -84,4 +83,5 @@ class TimerCustomSetViewHolder(itemView: View, private val mContext: Context) : 
             mContext.showTimerAlert()
         }
     }
+
 }

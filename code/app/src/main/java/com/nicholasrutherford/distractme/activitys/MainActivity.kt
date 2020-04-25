@@ -1,6 +1,5 @@
 package com.nicholasrutherford.distractme.activitys
 
-import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
@@ -24,18 +23,12 @@ Home.RefreshInterface{
         Stopped, Pause, Running
     }
 
-//    private val sharedPreference by lazy { applicationContext?.getSharedPreferences("NewsSharedPreferences", Context.MODE_PRIVATE) }
-//    private var editor = sharedPreference?.edit()
-
     private var typeface = Typeface()
-
     private lateinit var timer: CountDownTimer
     private var timerLengthSeconds: Long = 0
     private var timerState = TimerState.Stopped
     private var secondsRemaining: Long = 0
-
     private var currentTimeState: Long = 0
-
     private lateinit var currentTimeLeft: TextView
     private lateinit var viewPager: ViewPager
     private val setTimerAlert = TimerPopup()
@@ -53,9 +46,6 @@ Home.RefreshInterface{
         val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
         showTimerAlert()
-//        if(!!sharedPreference?.getBoolean("doNotShowMeAgain",false)) {
-//            showTimerAlert()
-//        }
     }
 
     override fun onPause() {
