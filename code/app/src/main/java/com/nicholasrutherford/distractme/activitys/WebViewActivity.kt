@@ -31,7 +31,7 @@ class WebViewActivity: AppCompatActivity() {
     private fun loadUrl() {
         val bundle :Bundle ?=intent.extras
         val url = bundle!!.getString("url")
-        wvNews.loadUrl(url)
+        wvNews.loadUrl("https://www.reddit.com/r/androiddev/comments/amrcuk/having_trouble_in_loading_a_page_on_webview/")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

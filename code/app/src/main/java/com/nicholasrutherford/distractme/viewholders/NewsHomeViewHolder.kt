@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
+import com.nicholasrutherford.distractme.activitys.MainActivity
 import com.nicholasrutherford.distractme.activitys.WebViewActivity
 import com.nicholasrutherford.distractme.data.responses.NewsResponse
 import com.nicholasrutherford.distractme.helpers.Typeface
@@ -54,7 +55,7 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
 
     private fun viewMoreNewsImp(newsResponse: NewsResponse, pos: Int) {
         btnViewArticle.setOnClickListener {
-             startWebViewActivity(newsResponse, pos)
+            (mContext as MainActivity).refreshNewsAdapter(newsResponse.articles[pos].url)
         }
     }
 

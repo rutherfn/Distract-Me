@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import com.nicholasrutherford.distractme.helpers.PrefUtil
 import com.nicholasrutherford.distractme.R
 import com.nicholasrutherford.distractme.adapters.ViewPagerAdapter
 import com.nicholasrutherford.distractme.fragments.Home
@@ -15,11 +14,12 @@ import com.nicholasrutherford.distractme.fragments.dialogs.CustomTimerPopup
 import com.nicholasrutherford.distractme.fragments.dialogs.TimerExtendPopup
 import com.nicholasrutherford.distractme.fragments.dialogs.TimerPopup
 import com.nicholasrutherford.distractme.helpers.NetworkTask
+import com.nicholasrutherford.distractme.helpers.PrefUtil
 import com.nicholasrutherford.distractme.helpers.Typeface
 
 
 class MainActivity : AppCompatActivity(),
-Home.RefreshInterface{
+Home.RefreshInterface {
 
     enum class TimerState{
         Stopped, Pause, Running
@@ -33,6 +33,7 @@ Home.RefreshInterface{
     private var currentTimeState: Long = 0
     private lateinit var currentTimeLeft: TextView
     private lateinit var viewPager: ViewPager
+    public var newWebUrl: String = ""
     private val setTimerAlert = TimerPopup()
     private val setCustomTimerAlert = CustomTimerPopup()
     private val extendTimerAlert = TimerExtendPopup()
@@ -62,6 +63,18 @@ Home.RefreshInterface{
     override fun refreshHomeAdapter() {
         viewPager.adapter?.notifyDataSetChanged()
         viewPager.currentItem = 0
+    }
+
+    fun refreshNewsAdapter(webUrl: String) {
+        viewPager.adapter?.notifyDataSetChanged()
+        viewPager.currentItem = 1
+        newWebUrl = webUrl
+        getWebUrl()
+      //  println(getWebUrl())
+    }
+
+    fun getWebUrl(): String? {
+        return newWebUrl
     }
 
     fun networkTaskProgress() {

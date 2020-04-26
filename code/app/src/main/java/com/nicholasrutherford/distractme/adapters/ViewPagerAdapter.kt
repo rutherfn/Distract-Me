@@ -23,7 +23,7 @@ class ViewPagerAdapter (private val mFragmentManager: FragmentManager, private v
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> getHomeInstance()
-            1 -> getFilterInstance()
+            1 -> getWebInstance()
             2 -> getFilterInstance()
             3 -> getSavedInstance()
             4 -> getLifeAfterThisInstance()
