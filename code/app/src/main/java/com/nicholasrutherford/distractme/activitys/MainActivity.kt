@@ -14,6 +14,7 @@ import com.nicholasrutherford.distractme.fragments.Home
 import com.nicholasrutherford.distractme.fragments.dialogs.CustomTimerPopup
 import com.nicholasrutherford.distractme.fragments.dialogs.TimerExtendPopup
 import com.nicholasrutherford.distractme.fragments.dialogs.TimerPopup
+import com.nicholasrutherford.distractme.helpers.NetworkTask
 import com.nicholasrutherford.distractme.helpers.Typeface
 
 
@@ -48,6 +49,7 @@ Home.RefreshInterface{
         val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
         showTimerAlert()
+       // networkTaskProgress()
     }
 
     override fun onPause() {
@@ -60,6 +62,10 @@ Home.RefreshInterface{
     override fun refreshHomeAdapter() {
         viewPager.adapter?.notifyDataSetChanged()
         viewPager.currentItem = 0
+    }
+
+    fun networkTaskProgress() {
+        NetworkTask(this).execute()
     }
 
     fun showTimerAlert() {
