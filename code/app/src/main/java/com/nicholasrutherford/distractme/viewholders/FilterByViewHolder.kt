@@ -462,8 +462,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
         removeTopHeadlineByCountryAndCategoriesFilters(editor)
         removeTopHeadlineSubjectFilters(editor)
         removeEverythingAllNewsBySubjectFilters(editor)
-        editor.apply()
-        (mContext as MainActivity).refreshHomeAdapter()
+        saveSharedPrefsShowNewData(editor)
     }
 
     private fun sourceTopHeadlinesFilter(editor: SharedPreferences.Editor) {
@@ -472,8 +471,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
         removeTopHeadlineByCountryAndCategoriesFilters(editor)
         removeTopHeadlineSubjectFilters(editor)
         removeEverythingAllNewsBySubjectFilters(editor)
-        editor.apply()
-        (mContext as MainActivity).refreshHomeAdapter()
+        saveSharedPrefsShowNewData(editor)
     }
 
     private fun categoryAndCountryFilter(editor: SharedPreferences.Editor) {
@@ -482,8 +480,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
         removeTopHeadlineSubjectFilters(editor)
         removeEverythingAllNewsBySubjectFilters(editor)
         setTopHeadlineByCountryAndCategoriesFilters(editor)
-        editor.apply()
-        (mContext as MainActivity).refreshHomeAdapter()
+        saveSharedPrefsShowNewData(editor)
     }
 
     private fun subjectFilter(editor: SharedPreferences.Editor) {
@@ -492,8 +489,7 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
         removeTopHeadlineBySourcesFilters(editor)
         removeTopHeadlineByCountryAndCategoriesFilters(editor)
         removeEverythingAllNewsBySubjectFilters(editor)
-        editor.apply()
-        (mContext as MainActivity).refreshHomeAdapter()
+        saveSharedPrefsShowNewData(editor)
     }
 
     private fun everythingFilter(editor: SharedPreferences.Editor) {
@@ -502,8 +498,13 @@ class FilterByViewHolder(itemView: View, private val mContext: Context) : Recycl
         removeTopHeadlineByCountryOnlyFilters(editor)
         removeTopHeadlineBySourcesFilters(editor)
         removeTopHeadlineByCountryAndCategoriesFilters(editor)
+        saveSharedPrefsShowNewData(editor)
+    }
+
+    private fun saveSharedPrefsShowNewData(editor: SharedPreferences.Editor) {
         editor.apply()
         (mContext as MainActivity).refreshHomeAdapter()
+        mContext.networkTaskProgress()
     }
 
 
