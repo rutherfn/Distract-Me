@@ -14,7 +14,7 @@ class WebViewActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_webview)
+        setContentView(R.layout.news_webview_layout)
         wvNews = findViewById(R.id.wvNews)
         main()
     }
