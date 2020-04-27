@@ -9,11 +9,11 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
 import com.nicholasrutherford.distractme.R
-import com.nicholasrutherford.distractme.activitys.MainActivity
 
 class Web: Fragment() {
-    private var webUrl: String = ""
+    private var webUrl: String? = ""
     private var mView: View? = null
     private var wvNews: WebView? = null
     var tvNoResultsFound: TextView? = null
@@ -22,12 +22,13 @@ class Web: Fragment() {
         mView = inflater.inflate(R.layout.fragment_web, container, false)
         wvNews = mView!!.findViewById(R.id.wvNews)
         tvNoResultsFound = mView!!.findViewById(R.id.tvNoResultsFound)
-        println((context as MainActivity).newWebUrl + "test data")
         main()
         return mView
     }
 
     private fun main() {
+        val sharedPreference = PreferenceManager.getDefaultSharedPreferences(context)
+        webUrl = sharedPreference.getString("webUrl","")
         checkBundle()
         setUpWebView()
     }

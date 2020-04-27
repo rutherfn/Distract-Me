@@ -17,7 +17,7 @@ class NetworkTask(var activity: MainActivity) : AsyncTask<Void, Void, Void>() {
         super.onPreExecute()
     }
     override fun doInBackground(vararg params: Void?): Void? {
-        Thread.sleep(1500)
+        Thread.sleep(1000)
         return null
     }
 

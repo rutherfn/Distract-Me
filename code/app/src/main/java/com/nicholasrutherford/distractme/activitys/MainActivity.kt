@@ -5,11 +5,14 @@ import android.os.CountDownTimer
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentTransaction
+import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.nicholasrutherford.distractme.R
 import com.nicholasrutherford.distractme.adapters.ViewPagerAdapter
 import com.nicholasrutherford.distractme.fragments.Home
+import com.nicholasrutherford.distractme.fragments.Web
 import com.nicholasrutherford.distractme.fragments.dialogs.CustomTimerPopup
 import com.nicholasrutherford.distractme.fragments.dialogs.TimerExtendPopup
 import com.nicholasrutherford.distractme.fragments.dialogs.TimerPopup
@@ -49,8 +52,15 @@ Home.RefreshInterface {
         viewPager.adapter = viewPagerAdapter
         val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
+        setSharedPrefsBackToEmpty()
         showTimerAlert()
-       // networkTaskProgress()
+    }
+
+    private fun setSharedPrefsBackToEmpty() {
+        val sharedPreference = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        val editor = sharedPreference.edit()
+        editor.putString("webUrl", "")
+        editor.apply()
     }
 
     override fun onPause() {
@@ -66,15 +76,12 @@ Home.RefreshInterface {
     }
 
     fun refreshNewsAdapter(webUrl: String) {
+        val sharedPreference = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        val editor = sharedPreference.edit()
+        editor.putString("webUrl",webUrl)
+        editor.apply()
         viewPager.adapter?.notifyDataSetChanged()
         viewPager.currentItem = 1
-        newWebUrl = webUrl
-        getWebUrl()
-      //  println(getWebUrl())
-    }
-
-    fun getWebUrl(): String? {
-        return newWebUrl
     }
 
     fun networkTaskProgress() {
