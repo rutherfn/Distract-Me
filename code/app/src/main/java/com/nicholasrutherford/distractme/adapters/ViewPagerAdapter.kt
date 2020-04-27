@@ -12,26 +12,28 @@ class ViewPagerAdapter (private val mFragmentManager: FragmentManager, private v
 
     private val mFragmentTags: MutableMap<Int, String?>
     private val tabTitles = arrayOf(
-        R.string.tab_text_1,
-        R.string.tab_text_2,
-        R.string.tab_text_3,
-        R.string.tab_text_4,
-            R.string.tab_text_5
+            R.string.tab_text_1,
+            R.string.tab_text_2,
+            R.string.tab_text_3,
+            R.string.tab_text_4,
+            R.string.tab_text_5,
+            R.string.tab_text_6
     )
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> getHomeInstance()
-            1 -> getFilterInstance()
-            2 -> getSavedInstance()
-            3 -> getLifeAfterThisInstance()
-            4 -> getMoreInstance()
+            1 -> getWebInstance()
+            2 -> getFilterInstance()
+            3 -> getSavedInstance()
+            4 -> getLifeAfterThisInstance()
+            5 -> getMoreInstance()
             else -> getHomeInstance()
         }
     }
 
     override fun getCount(): Int {
-        return 5
+        return 6
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
@@ -43,6 +45,8 @@ class ViewPagerAdapter (private val mFragmentManager: FragmentManager, private v
     }
 
     private fun getHomeInstance() = Home()
+
+    private fun getWebInstance() = Web()
 
     private fun getFilterInstance() = Filter()
 

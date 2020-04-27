@@ -1,0 +1,35 @@
+<androidx.core.widget.NestedScrollView xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/nsWeb"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/content_id"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvNoResultsFound"
+            android:text="@string/no_results_found_text"
+            android:textSize="@dimen/default_header_tv_size"
+            android:visibility="gone"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+        </TextView>
+
+        <WebView
+            android:id="@+id/wvNews"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/default_margin_or_padding"
+            tools:ignore="WebViewLayout">
+        </WebView>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -5,10 +5,11 @@
 
     <!-- Tab Text Strings -->
     <string name="tab_text_1">News</string>
-    <string name="tab_text_2">Filter</string>
-    <string name="tab_text_3">Saved</string>
-    <string name="tab_text_4">Game</string>
-    <string name="tab_text_5">More</string>
+    <string name="tab_text_2">Web</string>
+    <string name="tab_text_3">Filter</string>
+    <string name="tab_text_4">Saved</string>
+    <string name="tab_text_5">Game</string>
+    <string name="tab_text_6">More</string>
 
     <!-- News Endpoint Filter By Strings -->
     <string name="top_headlines">Top Headlines</string>
@@ -77,5 +78,7 @@
     <string name="times_up_desc">Sorry you have ran out of time! Would you like to extend your time? If you select NO the app will close!</string>
     <string name="times_up_yes_extend">YES</string>
     <string name="times_up_no_extend">NO</string>
+
+    <string name="no_results_found_text">No Results Found: Please Select View More On A Article</string>
 
 </resources>

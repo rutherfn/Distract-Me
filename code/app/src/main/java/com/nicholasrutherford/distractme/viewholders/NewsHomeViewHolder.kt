@@ -1,14 +1,13 @@
 package com.nicholasrutherford.distractme.viewholders
 
 import android.content.Context
-import android.content.Intent
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
-import com.nicholasrutherford.distractme.activitys.WebViewActivity
+import com.nicholasrutherford.distractme.activitys.MainActivity
 import com.nicholasrutherford.distractme.data.responses.NewsResponse
 import com.nicholasrutherford.distractme.helpers.Typeface
 import com.squareup.picasso.Picasso
@@ -29,10 +28,10 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
     fun main(newsResponse: NewsResponse, pos: Int) {
         setTypeface()
 
-        if(newsResponse.articles[pos].urlToImage != "") {
+        if(newsResponse.articles[pos].urlToImage != "" || newsResponse.articles[pos].urlToImage != null) {
             Picasso.get().load(newsResponse.articles[pos].urlToImage).into(ivArticle)
         } else {
-            Picasso.get().load(R.drawable.news).into(ivArticle)
+           // Picasso.get().load(R.drawable.news).into(ivArticle)
         }
 
         tvArticleTitle.text = newsResponse.articles[pos].title
@@ -54,14 +53,8 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
 
     private fun viewMoreNewsImp(newsResponse: NewsResponse, pos: Int) {
         btnViewArticle.setOnClickListener {
-             startWebViewActivity(newsResponse, pos)
+            (mContext as MainActivity).refreshNewsAdapter(newsResponse.articles[pos].url)
         }
-    }
-
-    private fun startWebViewActivity(newsResponse: NewsResponse, pos: Int) {
-        val intent = Intent(mContext, WebViewActivity::class.java)
-        intent.putExtra("url", newsResponse.articles[pos].url)
-        mContext.startActivity(intent)
     }
 
 }
