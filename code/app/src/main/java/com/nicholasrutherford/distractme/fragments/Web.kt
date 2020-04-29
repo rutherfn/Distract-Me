@@ -29,12 +29,7 @@ class Web: Fragment() {
     private fun main() {
         val sharedPreference = PreferenceManager.getDefaultSharedPreferences(context)
         webUrl = sharedPreference.getString("webUrl","")
-        checkBundle()
         setUpWebView()
-    }
-
-    private fun checkBundle() {
-        println(webUrl)
     }
 
     @SuppressLint("SetJavaScriptEnabled")

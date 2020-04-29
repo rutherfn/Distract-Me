@@ -56,7 +56,6 @@ class Home : Fragment() {
     private fun initAdapter(sharedPreferences: SharedPreferences) {
         newsTopHeadlines.observe(viewLifecycleOwner, Observer {
             articleAdapter = News(requireContext(), it)
-            println(it.articles.get(0).urlToImage + " url to image")
             rvHomes!!.adapter = articleAdapter
         })
     }

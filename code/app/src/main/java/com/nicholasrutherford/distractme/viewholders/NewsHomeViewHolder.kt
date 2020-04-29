@@ -28,11 +28,11 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
     fun main(newsResponse: NewsResponse, pos: Int) {
         setTypeface()
 
-        if(newsResponse.articles[pos].urlToImage != "" || newsResponse.articles[pos].urlToImage != null) {
-            Picasso.get().load(newsResponse.articles[pos].urlToImage).into(ivArticle)
-        } else {
-           // Picasso.get().load(R.drawable.news).into(ivArticle)
-        }
+       // if(!newsResponse.articles[pos].urlToImage.isNullOrEmpty()) {
+        //    Picasso.get().load(newsResponse.articles[pos].urlToImage).into(ivArticle)
+       // } else {
+            Picasso.get().load("https://www.thevisateam.com/assets/uploads/placeholder-image.png").into(ivArticle)
+       // }
 
         tvArticleTitle.text = newsResponse.articles[pos].title
         tvArticleDesc.text = newsResponse.articles[pos].description
