@@ -5,14 +5,12 @@ import android.os.CountDownTimer
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentTransaction
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.nicholasrutherford.distractme.R
 import com.nicholasrutherford.distractme.adapters.ViewPagerAdapter
 import com.nicholasrutherford.distractme.fragments.Home
-import com.nicholasrutherford.distractme.fragments.Web
 import com.nicholasrutherford.distractme.fragments.dialogs.CustomTimerPopup
 import com.nicholasrutherford.distractme.fragments.dialogs.TimerExtendPopup
 import com.nicholasrutherford.distractme.fragments.dialogs.TimerPopup
@@ -36,7 +34,6 @@ Home.RefreshInterface {
     private var currentTimeState: Long = 0
     private lateinit var currentTimeLeft: TextView
     private lateinit var viewPager: ViewPager
-    public var newWebUrl: String = ""
     private val setTimerAlert = TimerPopup()
     private val setCustomTimerAlert = CustomTimerPopup()
     private val extendTimerAlert = TimerExtendPopup()

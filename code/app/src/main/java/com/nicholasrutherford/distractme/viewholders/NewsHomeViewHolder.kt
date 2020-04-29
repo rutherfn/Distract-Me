@@ -41,6 +41,7 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
         tvSource.text = "Source: ".plus(newsResponse.articles[pos].source.name)
         tvArticleDate.text = "Published Date: ".plus(newsResponse.articles[pos].publishedAt)
         viewMoreNewsImp(newsResponse, pos)
+        likeArticleClickFunc()
     }
 
     private fun setTypeface() {
@@ -49,6 +50,12 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
         typeface.setTypefaceForBodyRegularBold(tvAuthorTitle, mContext)
         typeface.setTypefaceForSubHeaderBold(tvSource,mContext)
         typeface.setTypefaceForSubHeaderBold(tvArticleDate,mContext)
+    }
+
+    private fun likeArticleClickFunc() {
+        ivStar.setOnClickListener {
+            ivStar.setColorFilter(R.color.colorPrimary)
+        }
     }
 
     private fun viewMoreNewsImp(newsResponse: NewsResponse, pos: Int) {

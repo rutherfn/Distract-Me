@@ -15,9 +15,7 @@ class ViewPagerAdapter (private val mFragmentManager: FragmentManager, private v
             R.string.tab_text_1,
             R.string.tab_text_2,
             R.string.tab_text_3,
-            R.string.tab_text_4,
-            R.string.tab_text_5,
-            R.string.tab_text_6
+            R.string.tab_text_4
     )
 
     override fun getItem(position: Int): Fragment {
@@ -26,14 +24,12 @@ class ViewPagerAdapter (private val mFragmentManager: FragmentManager, private v
             1 -> getWebInstance()
             2 -> getFilterInstance()
             3 -> getSavedInstance()
-            4 -> getLifeAfterThisInstance()
-            5 -> getMoreInstance()
             else -> getHomeInstance()
         }
     }
 
     override fun getCount(): Int {
-        return 6
+        return 4
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
@@ -51,10 +47,6 @@ class ViewPagerAdapter (private val mFragmentManager: FragmentManager, private v
     private fun getFilterInstance() = Filter()
 
     private fun getSavedInstance() = Saved()
-
-    private fun getMoreInstance() = More()
-
-    private fun getLifeAfterThisInstance() = More()
 
     fun getFragment(position: Int): Fragment? { // get fragment by tag
         var fragment: Fragment? = null
