@@ -45,13 +45,6 @@ class Saved: Fragment() {
         rvSaved!!.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun initNewsResponse() {
-//        val db = SavedArticlesDatabase(this)
-//        lifecycleScope.launch {
-//           savedArticleList = db.savedArticleDao().getAll()
-//        }
-    }
-
     private fun initAdapter() {
         articleSavedAdapter = NewsDb(requireContext(), (context as MainActivity).savedArticleList)
         rvSaved?.adapter = articleSavedAdapter

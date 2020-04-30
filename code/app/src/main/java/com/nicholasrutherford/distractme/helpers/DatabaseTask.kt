@@ -11,7 +11,6 @@ class DatabaseTask(var activity: MainActivity, var db: SavedArticlesDatabase?, p
         savedArticleList.clear()
         db?.savedArticleDao()?.getAll()?.forEach {
             savedArticleList.add(it)
-            println(savedArticleList[0].title)
         }
         return null
     }

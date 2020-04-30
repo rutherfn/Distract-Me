@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
@@ -31,8 +32,8 @@ Home.RefreshInterface {
         Stopped, Pause, Running
     }
 
-    private var typeface = Typeface()
     val savedArticleList = ArrayList<SavedArticlesEntity>()
+    private var typeface = Typeface()
     private lateinit var timer: CountDownTimer
     private var timerLengthSeconds: Long = 0
     private var timerState = TimerState.Stopped
@@ -60,8 +61,7 @@ Home.RefreshInterface {
         showTimerAlert()
         db = SavedArticlesDatabase(this)
         DatabaseTask(this,db,savedArticleList).execute()
-
-    }
+}
 
     fun emptySavedArticlesDb() {
         GlobalScope.launch {
@@ -74,6 +74,7 @@ Home.RefreshInterface {
             db?.savedArticleDao()?.insertAll(SavedArticlesEntity(0, title, desc, author, sourceName, publishedAt, imageUrl, url))
         }
         DatabaseTask(this,db,savedArticleList).execute()
+        networkTaskProgress()
     }
 
     private fun setSharedPrefsBackToEmpty() {

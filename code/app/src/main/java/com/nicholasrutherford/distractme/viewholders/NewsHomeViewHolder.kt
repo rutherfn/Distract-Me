@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.nicholasrutherford.distractme.R
 import com.nicholasrutherford.distractme.activitys.MainActivity
@@ -25,21 +26,22 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
     private var tvSource: TextView = itemView.findViewById(R.id.tvSource)
     private var tvArticleDate: TextView = itemView.findViewById(R.id.tvArticleDate)
 
+    // string values
+    private var articleTitle: String = ""
+    private var articleDesc: String = ""
+    private var articleAuthor: String = ""
+    private var articleSources: String = ""
+    private var articlePublishedDate: String = ""
+    private var articleImage: String = ""
+    private var articleViewMoreUrl: String = ""
+
+    // const
+    private var VIEW_MORE: String = "View MORE"
+
     fun main(newsResponse: NewsResponse, pos: Int) {
         setTypeface()
-
-        if(!newsResponse.articles[pos].urlToImage.isNullOrEmpty()) {
-           Picasso.get().load(newsResponse.articles[pos].urlToImage).into(ivArticle)
-        } else {
-            Picasso.get().load("https://www.thevisateam.com/assets/uploads/placeholder-image.png").into(ivArticle)
-        }
-
-        tvArticleTitle.text = newsResponse.articles[pos].title
-        tvArticleDesc.text = newsResponse.articles[pos].description
-        tvAuthorTitle.text = newsResponse.articles[pos].author
-        btnViewArticle.text = "View More"
-        tvSource.text = "Source: ".plus(newsResponse.articles[pos].source.name)
-        tvArticleDate.text = "Published Date: ".plus(newsResponse.articles[pos].publishedAt)
+        setData(newsResponse, pos)
+        initDataIntoLayout()
         viewMoreNewsImp(newsResponse, pos)
         likeArticleClickFunc(newsResponse, pos)
     }
@@ -52,19 +54,73 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
         typeface.setTypefaceForSubHeaderBold(tvArticleDate,mContext)
     }
 
+    private fun setData(newsResponse: NewsResponse, pos: Int) {
+        articleTitle = if(newsResponse.articles[pos].title.isNullOrEmpty()) {
+            "Unknown Title"
+        } else {
+            newsResponse.articles[pos].title
+        }
+
+        articleDesc = if(newsResponse.articles[pos].description.isNullOrEmpty()) {
+            "Unknown Desc..."
+        } else {
+            newsResponse.articles[pos].description
+        }
+
+        articleAuthor = if(newsResponse.articles[pos].author.isNullOrEmpty()) {
+            "Unknown Author"
+        } else {
+            newsResponse.articles[pos].author
+        }
+
+        articleSources = if(newsResponse.articles[pos].source.name.isNullOrEmpty()) {
+            "Unknown Source"
+        } else {
+            "Source: ".plus(newsResponse.articles[pos].source.name)
+        }
+
+        articlePublishedDate = if(newsResponse.articles[pos].publishedAt.isNullOrEmpty()) {
+            "Unknown Published Date"
+        } else {
+            "Published Date: ".plus(newsResponse.articles[pos].publishedAt)
+        }
+
+        articleImage = if(newsResponse.articles[pos].urlToImage.isNullOrEmpty()) {
+            "https://www.thevisateam.com/assets/uploads/placeholder-image.png"
+        } else {
+            newsResponse.articles[pos].urlToImage
+        }
+
+        articleViewMoreUrl = if(newsResponse.articles[pos].urlToImage.isNullOrEmpty()) {
+            "https://baymard.com/ecommerce-search/benchmark/page-types/no-search-results-page"
+        } else {
+            newsResponse.articles[pos].url
+        }
+
+    }
+
+    private fun initDataIntoLayout() {
+        tvArticleTitle.text = articleTitle
+        tvArticleDesc.text = articleDesc
+        tvAuthorTitle.text = articleAuthor
+        tvSource.text = articleSources
+        tvArticleDate.text = articlePublishedDate
+        Picasso.get().load(articleImage).into(ivArticle)
+        btnViewArticle.text = VIEW_MORE
+    }
+
     private fun likeArticleClickFunc(newsResponse: NewsResponse, pos: Int) {
         ivStar.setOnClickListener {
-            ivStar.setColorFilter(R.color.colorPrimary)
-            (mContext as MainActivity).savedArticlesToRoomDb(newsResponse.articles[pos].title, newsResponse.articles[pos].description, newsResponse.articles[pos].author,
-                    newsResponse.articles[pos].source.name,newsResponse.articles[pos].publishedAt, newsResponse.articles[pos].urlToImage, newsResponse.articles[pos].url)
-            // alert that data has been added to db
-            // set the ivstar back to regular color
+            (mContext as MainActivity).savedArticlesToRoomDb(articleTitle, articleDesc, articleAuthor,
+                    articleSources,articlePublishedDate, articleImage, articleViewMoreUrl)
+            val toast = Toast.makeText(mContext, "Article Has Been Saved For You!", Toast.LENGTH_LONG)
+            toast.show()
         }
     }
 
     private fun viewMoreNewsImp(newsResponse: NewsResponse, pos: Int) {
         btnViewArticle.setOnClickListener {
-            (mContext as MainActivity).refreshNewsAdapter(newsResponse.articles[pos].url)
+            (mContext as MainActivity).refreshNewsAdapter(articleViewMoreUrl)
         }
     }
 
