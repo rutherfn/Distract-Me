@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import com.nicholasrutherford.distractme.R
+import com.nicholasrutherford.distractme.helpers.Typeface
 
 class Web: Fragment() {
     private var webUrl: String? = ""
@@ -30,6 +31,12 @@ class Web: Fragment() {
         val sharedPreference = PreferenceManager.getDefaultSharedPreferences(context)
         webUrl = sharedPreference.getString("webUrl","")
         setUpWebView()
+        setTypeface()
+    }
+
+    private fun setTypeface() {
+        val typeface = Typeface()
+        tvNoResultsFound?.let { context?.let { it1 -> typeface.setTypefaceForHeaderBold(it, it1) } }
     }
 
     @SuppressLint("SetJavaScriptEnabled")

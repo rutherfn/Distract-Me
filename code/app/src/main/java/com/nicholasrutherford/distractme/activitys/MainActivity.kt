@@ -1,10 +1,12 @@
 package com.nicholasrutherford.distractme.activitys
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
@@ -202,6 +204,7 @@ Home.RefreshInterface {
         }.start()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateCountDownUI() {
         val minutesUntilFinished = secondsRemaining / 60
         val secondsInMinuteUntilFinished = secondsRemaining - minutesUntilFinished * 60
@@ -213,6 +216,14 @@ Home.RefreshInterface {
         currentTimeState = time
         timerState =  TimerState.Running
         initTimer()
+    }
+
+    override fun onBackPressed() {
+        if(viewPager.currentItem != 0) {
+            viewPager.setCurrentItem(0,false)
+        } else {
+            super.onBackPressed()
+        }
     }
 
 }
