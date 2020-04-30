@@ -41,7 +41,7 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
         tvSource.text = "Source: ".plus(newsResponse.articles[pos].source.name)
         tvArticleDate.text = "Published Date: ".plus(newsResponse.articles[pos].publishedAt)
         viewMoreNewsImp(newsResponse, pos)
-        likeArticleClickFunc()
+        likeArticleClickFunc(newsResponse, pos)
     }
 
     private fun setTypeface() {
@@ -52,9 +52,13 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
         typeface.setTypefaceForSubHeaderBold(tvArticleDate,mContext)
     }
 
-    private fun likeArticleClickFunc() {
+    private fun likeArticleClickFunc(newsResponse: NewsResponse, pos: Int) {
         ivStar.setOnClickListener {
             ivStar.setColorFilter(R.color.colorPrimary)
+            (mContext as MainActivity).savedArticlesToRoomDb(newsResponse.articles[pos].title, newsResponse.articles[pos].description, newsResponse.articles[pos].author,
+                    newsResponse.articles[pos].source.name,newsResponse.articles[pos].publishedAt, newsResponse.articles[pos].urlToImage, newsResponse.articles[pos].url)
+            // alert that data has been added to db
+            // set the ivstar back to regular color
         }
     }
 
