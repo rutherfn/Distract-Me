@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
@@ -19,13 +17,16 @@ import com.nicholasrutherford.distractme.fragments.Home
 import com.nicholasrutherford.distractme.fragments.dialogs.CustomTimerPopup
 import com.nicholasrutherford.distractme.fragments.dialogs.TimerExtendPopup
 import com.nicholasrutherford.distractme.fragments.dialogs.TimerPopup
-import com.nicholasrutherford.distractme.helpers.DatabaseTask
-import com.nicholasrutherford.distractme.helpers.NetworkTask
+import com.nicholasrutherford.distractme.helpers.tasks.DatabaseTask
+import com.nicholasrutherford.distractme.helpers.tasks.NetworkTask
 import com.nicholasrutherford.distractme.helpers.PrefUtil
 import com.nicholasrutherford.distractme.helpers.Typeface
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+/**
+ * Created by Nick R.
+ */
 
 class MainActivity : AppCompatActivity(),
 Home.RefreshInterface {
@@ -62,20 +63,14 @@ Home.RefreshInterface {
         setSharedPrefsBackToEmpty()
         showTimerAlert()
         db = SavedArticlesDatabase(this)
-        DatabaseTask(this,db,savedArticleList).execute()
+        DatabaseTask(db, savedArticleList).execute()
 }
-
-    fun emptySavedArticlesDb() {
-        GlobalScope.launch {
-            db?.savedArticleDao()?.clearDb()
-        }
-    }
 
     fun savedArticlesToRoomDb(title: String, desc: String, author: String, sourceName: String, publishedAt: String, imageUrl: String, url: String) {
         GlobalScope.launch {
             db?.savedArticleDao()?.insertAll(SavedArticlesEntity(0, title, desc, author, sourceName, publishedAt, imageUrl, url))
         }
-        DatabaseTask(this,db,savedArticleList).execute()
+        DatabaseTask(db, savedArticleList).execute()
         networkTaskProgress()
     }
 
@@ -83,7 +78,7 @@ Home.RefreshInterface {
         GlobalScope.launch {
             db?.savedArticleDao()?.delete(savedArticles)
         }
-        DatabaseTask(this,db,savedArticleList).execute()
+        DatabaseTask(db, savedArticleList).execute()
         networkTaskProgress()
         viewPager.adapter?.notifyDataSetChanged()
     }
