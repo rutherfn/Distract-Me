@@ -77,6 +77,15 @@ Home.RefreshInterface {
         networkTaskProgress()
     }
 
+    fun removeArticleInRoomDb(savedArticles: SavedArticlesEntity) {
+        GlobalScope.launch {
+            db?.savedArticleDao()?.delete(savedArticles)
+        }
+        DatabaseTask(this,db,savedArticleList).execute()
+        networkTaskProgress()
+        viewPager.adapter?.notifyDataSetChanged()
+    }
+
     private fun setSharedPrefsBackToEmpty() {
         val sharedPreference = PreferenceManager.getDefaultSharedPreferences(applicationContext)
         val editor = sharedPreference.edit()

@@ -34,15 +34,13 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
     private var articlePublishedDate: String = ""
     private var articleImage: String = ""
     private var articleViewMoreUrl: String = ""
-
-    // const
-    private var VIEW_MORE: String = "View MORE"
+    private var viewMore: String = "View More"
 
     fun main(newsResponse: NewsResponse, pos: Int) {
         setTypeface()
         setData(newsResponse, pos)
         initDataIntoLayout()
-        viewMoreNewsImp(newsResponse, pos)
+        viewMoreNewsImp()
         likeArticleClickFunc(newsResponse, pos)
     }
 
@@ -106,7 +104,7 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
         tvSource.text = articleSources
         tvArticleDate.text = articlePublishedDate
         Picasso.get().load(articleImage).into(ivArticle)
-        btnViewArticle.text = VIEW_MORE
+        btnViewArticle.text = viewMore
     }
 
     private fun likeArticleClickFunc(newsResponse: NewsResponse, pos: Int) {
@@ -118,7 +116,7 @@ class NewsHomeViewHolder(itemView: View, private val mContext: Context) : Recycl
         }
     }
 
-    private fun viewMoreNewsImp(newsResponse: NewsResponse, pos: Int) {
+    private fun viewMoreNewsImp() {
         btnViewArticle.setOnClickListener {
             (mContext as MainActivity).refreshNewsAdapter(articleViewMoreUrl)
         }

@@ -11,7 +11,7 @@ import com.nicholasrutherford.distractme.viewholders.NewsDbViewHolder
 class NewsDb(private val mContext: Context, private var savedArticleList: List<SavedArticlesEntity>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.article_home_layout, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.article_saved_layout, parent, false)
         return NewsDbViewHolder(itemView,mContext)
     }
 
