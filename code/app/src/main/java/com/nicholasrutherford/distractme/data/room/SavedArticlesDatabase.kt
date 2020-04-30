@@ -26,4 +26,5 @@ abstract class SavedArticlesDatabase  : RoomDatabase() {
                 SavedArticlesDatabase::class.java, "saved-article.db")
                 .build()
     }
+
 }

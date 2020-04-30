@@ -14,6 +14,4 @@ interface SavedArticleDao {
     @Delete
     fun delete(savedArticles: SavedArticlesEntity)
 
-    @Query("DELETE FROM saved_articles")
-    fun clearDb()
 }

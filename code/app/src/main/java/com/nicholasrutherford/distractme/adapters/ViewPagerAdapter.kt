@@ -48,16 +48,6 @@ class ViewPagerAdapter (private val mFragmentManager: FragmentManager, private v
 
     private fun getSavedInstance() = Saved()
 
-    fun getFragment(position: Int): Fragment? { // get fragment by tag
-        var fragment: Fragment? = null
-        val tag = mFragmentTags[position]
-
-        if (tag != null) {
-            fragment = mFragmentManager.findFragmentByTag(tag)
-        }
-        return fragment
-    }
-
     init {
         mFragmentTags = HashMap()
     }

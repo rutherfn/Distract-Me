@@ -55,4 +55,5 @@ class TimerExtendViewHolder(itemView: View, private val mContext: Context) : Rec
             dismissApp()
         }
     }
+
 }

@@ -22,7 +22,4 @@ class NonSwipeViewPager(context: Context, attrs: AttributeSet): ViewPager(contex
         }
     }
 
-    fun setSwipePagingEnabled(swipeEnabled: Boolean) {
-        this.swipeEnabled = swipeEnabled
-    }
 }

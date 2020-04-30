@@ -1,4 +1,4 @@
-package com.nicholasrutherford.distractme.helpers
+package com.nicholasrutherford.distractme.helpers.tasks
 
 import android.app.Dialog
 import android.os.AsyncTask
