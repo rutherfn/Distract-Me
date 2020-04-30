@@ -58,15 +58,6 @@
         app:layout_constraintStart_toStartOf="@+id/spSettingTimer"
         app:layout_constraintTop_toBottomOf="@+id/spSettingTimer" />
 
-    <TextView
-        android:id="@+id/tvDontShowMeAgain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/default_margin_or_padding"
-        android:layout_marginTop="@dimen/default_margin_or_padding"
-        android:text="@string/dialog_dont_show_me_again_text"
-        app:layout_constraintStart_toStartOf="@+id/tvConfirmTime"
-        app:layout_constraintTop_toBottomOf="@+id/tvConfirmTime" />
 
     <ImageView
         android:id="@+id/ivDelete"

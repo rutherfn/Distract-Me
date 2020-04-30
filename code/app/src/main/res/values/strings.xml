@@ -8,8 +8,6 @@
     <string name="tab_text_2">Web</string>
     <string name="tab_text_3">Filter</string>
     <string name="tab_text_4">Saved</string>
-    <string name="tab_text_5">Game</string>
-    <string name="tab_text_6">More</string>
 
     <!-- News Endpoint Filter By Strings -->
     <string name="top_headlines">Top Headlines</string>
@@ -80,5 +78,9 @@
     <string name="times_up_no_extend">NO</string>
 
     <string name="no_results_found_text">No Results Found: Please Select View More On A Article</string>
+    <string name="no_saved_articles">You currently do not have any saved articles.</string>
+
+    <string name="yes_dialog_text">Yes</string>
+    <string name="no_dialog_text">No</string>
 
 </resources>

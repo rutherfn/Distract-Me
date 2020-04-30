@@ -38,7 +38,6 @@ class TimerSetViewHolder(itemView: View, private val mContext: Context) : Recycl
     private var tvCurrentTimeSet: TextView = itemView.findViewById(R.id.tvCurrentTimeSet)
     private var spSettingTimer: Spinner = itemView.findViewById(R.id.spSettingTimer)
     private var tvConfirmTime: TextView = itemView.findViewById(R.id.tvConfirmTime)
-    private var tvDontShowMeAgain: TextView = itemView.findViewById(R.id.tvDontShowMeAgain)
     private var ivDelete: ImageView = itemView.findViewById(R.id.ivDelete)
 
     fun main() {
@@ -47,7 +46,6 @@ class TimerSetViewHolder(itemView: View, private val mContext: Context) : Recycl
         setUpSettingTimerItems()
         deleteClickListener()
         confirmClickListener()
-        doNotRemindMeListener()
         setSharedPrefsValuesBackToNull()
     }
 
@@ -56,7 +54,6 @@ class TimerSetViewHolder(itemView: View, private val mContext: Context) : Recycl
         typeface.setTypefaceForBodyRegular(tvHowLongDesc, mContext)
         typeface.setTypefaceForSubHeaderBold(tvCurrentTimeSet, mContext)
         typeface.setTypefaceForBodyRegularBold(tvConfirmTime, mContext)
-        typeface.setTypefaceForBodyRegularBold(tvDontShowMeAgain, mContext)
     }
 
     private fun setMinutesAndSecondsValue() {
@@ -190,16 +187,6 @@ class TimerSetViewHolder(itemView: View, private val mContext: Context) : Recycl
             (mContext as MainActivity).dismissTimerAlert()
             mContext.onTimerFinished()
             mContext.startTimeForTimer(actualTimeValueSet)
-            editor.putBoolean("doNotShowMeAgain",false)
-            editor.apply()
-        }
-    }
-
-    private fun doNotRemindMeListener() {
-        tvDontShowMeAgain.setOnClickListener {
-            editor.putBoolean("doNotShowMeAgain",true)
-            editor.apply()
-            (mContext as MainActivity).dismissTimerAlert()
         }
     }
 
