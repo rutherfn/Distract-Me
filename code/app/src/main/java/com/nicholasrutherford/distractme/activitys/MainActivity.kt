@@ -4,21 +4,25 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentTransaction
 import androidx.preference.PreferenceManager
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.nicholasrutherford.distractme.R
 import com.nicholasrutherford.distractme.adapters.ViewPagerAdapter
+import com.nicholasrutherford.distractme.data.room.SavedArticlesDatabase
+import com.nicholasrutherford.distractme.data.room.SavedArticlesEntity
 import com.nicholasrutherford.distractme.fragments.Home
-import com.nicholasrutherford.distractme.fragments.Web
 import com.nicholasrutherford.distractme.fragments.dialogs.CustomTimerPopup
 import com.nicholasrutherford.distractme.fragments.dialogs.TimerExtendPopup
 import com.nicholasrutherford.distractme.fragments.dialogs.TimerPopup
+import com.nicholasrutherford.distractme.helpers.DatabaseTask
 import com.nicholasrutherford.distractme.helpers.NetworkTask
 import com.nicholasrutherford.distractme.helpers.PrefUtil
 import com.nicholasrutherford.distractme.helpers.Typeface
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity(),
@@ -28,6 +32,7 @@ Home.RefreshInterface {
         Stopped, Pause, Running
     }
 
+    val savedArticleList = ArrayList<SavedArticlesEntity>()
     private var typeface = Typeface()
     private lateinit var timer: CountDownTimer
     private var timerLengthSeconds: Long = 0
@@ -36,11 +41,11 @@ Home.RefreshInterface {
     private var currentTimeState: Long = 0
     private lateinit var currentTimeLeft: TextView
     private lateinit var viewPager: ViewPager
-    public var newWebUrl: String = ""
     private val setTimerAlert = TimerPopup()
     private val setCustomTimerAlert = CustomTimerPopup()
     private val extendTimerAlert = TimerExtendPopup()
     private val fm = supportFragmentManager
+    private var db: SavedArticlesDatabase? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +59,31 @@ Home.RefreshInterface {
         tabs.setupWithViewPager(viewPager)
         setSharedPrefsBackToEmpty()
         showTimerAlert()
+        db = SavedArticlesDatabase(this)
+        DatabaseTask(this,db,savedArticleList).execute()
+}
+
+    fun emptySavedArticlesDb() {
+        GlobalScope.launch {
+            db?.savedArticleDao()?.clearDb()
+        }
+    }
+
+    fun savedArticlesToRoomDb(title: String, desc: String, author: String, sourceName: String, publishedAt: String, imageUrl: String, url: String) {
+        GlobalScope.launch {
+            db?.savedArticleDao()?.insertAll(SavedArticlesEntity(0, title, desc, author, sourceName, publishedAt, imageUrl, url))
+        }
+        DatabaseTask(this,db,savedArticleList).execute()
+        networkTaskProgress()
+    }
+
+    fun removeArticleInRoomDb(savedArticles: SavedArticlesEntity) {
+        GlobalScope.launch {
+            db?.savedArticleDao()?.delete(savedArticles)
+        }
+        DatabaseTask(this,db,savedArticleList).execute()
+        networkTaskProgress()
+        viewPager.adapter?.notifyDataSetChanged()
     }
 
     private fun setSharedPrefsBackToEmpty() {
