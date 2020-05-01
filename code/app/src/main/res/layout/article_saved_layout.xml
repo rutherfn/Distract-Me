@@ -79,11 +79,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/default_margin_or_padding"
-        android:tint="@color/colorGray"
+        android:tint="@color/colorRed"
         app:layout_constraintEnd_toEndOf="@+id/tvAuthorTitle"
         app:layout_constraintStart_toStartOf="@+id/tvAuthorTitle"
         app:layout_constraintTop_toBottomOf="@+id/tvAuthorTitle"
-        app:srcCompat="@android:drawable/star_big_off" />
+        app:srcCompat="@android:drawable/ic_delete" />
 
     <TextView
         android:id="@+id/tvSource"
